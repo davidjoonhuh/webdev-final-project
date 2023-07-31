@@ -68,3 +68,15 @@ This section has moved here: [https://facebook.github.io/create-react-app/docs/d
 ### `npm run build` fails to minify
 
 This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+
+
+## How Jin set up the repo
+I'm pretty sure that since I added the bootstrap, react-icons, react-router, and react-router-dom, the rest of you just have to run npm install for it to work. But just in case, included what I installed individually.
+ ```
+ npm install
+ npm start (To see the app)
+ npm install bootstrap 
+ npm install react-icons
+ npm install react-router
+ npm install react-router-dom
+ ```
