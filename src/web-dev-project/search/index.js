@@ -1,6 +1,7 @@
 import "./index.css";
 import SearchBar from "./search-bar";
 import youtubeApi from "../youtube-api";
+import VideoList from "./video-list";
 import { useState } from "react";
 
 function SearchPage() {
@@ -9,6 +10,7 @@ function SearchPage() {
         selectedVideo: null
     }
     const [videos, setVideos] = useState("");
+    const [selectedVideo, setSelectedVideo] = useState("");
 
     const handleSubmit = async (searchTerm) => {
         const response = await youtubeApi.get('/search', {
@@ -20,11 +22,14 @@ function SearchPage() {
 
         console.log("Response from API:", response);
     };
+    const handleVideoSelect = (video) => {
+        setSelectedVideo(video)
+    }
 
     return <>
         <h2>Search Page</h2>
         <SearchBar handleFormSubmit={handleSubmit}/>
-
+        <VideoList handleVideoSelect={handleVideoSelect} videos={videos}/>
     </>;
 }
 
