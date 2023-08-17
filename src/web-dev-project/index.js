@@ -4,7 +4,7 @@ import NavigationSidebar from "./navigation-sidebar";
 import { configureStore } from '@reduxjs/toolkit';
 import { Provider } from "react-redux";
 import videoReducer from "./reducers/video-reducer";
-import SearchPage from "./search/search-bar";
+import SearchPage from "./search";
 
 const store = configureStore(
     { reducer: { vids: videoReducer } });
@@ -27,8 +27,6 @@ function Youboxd() {
                     </div>
                 </div>
             </div>
-
-
         </Provider>
     );
 }

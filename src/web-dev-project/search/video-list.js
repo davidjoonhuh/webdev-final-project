@@ -6,7 +6,6 @@ const VideoList = () => {
     const vids = useSelector(state => state.vids.vids)
 
     return(
-
         <div className='ui relaxed divided list'>
             <ul className="list-group">
                 {

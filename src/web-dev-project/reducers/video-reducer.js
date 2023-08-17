@@ -10,9 +10,7 @@ const videoSlice = createSlice({
     initialState,
     reducers: {
         updateVideoArray(state, action) {
-            console.log(action.payload)
             state.vids = action.payload.slice(0);
-            console.log(state.vids)
         },
     }
 });

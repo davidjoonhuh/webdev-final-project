@@ -21,14 +21,13 @@ function SearchBar() {
 
     const handleSubmit = async (event) => {
         event.preventDefault();
-        console.log(inputText)
 
         const path = location.pathname;
 
-        if (path === "/search") {
+        if (path === "/youboxd/search") {
             navigate("?criteria=" + inputText);
         } else {
-            navigate("search?criteria=" + inputText);
+            navigate("/youboxd/search?criteria=" + inputText);
         }
 
 
