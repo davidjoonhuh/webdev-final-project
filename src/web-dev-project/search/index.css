@@ -2,3 +2,12 @@
     bottom: 2px;
     left: 25px;
 }
+
+.wd-font-bold {
+    font-weight: bold;
+}
+
+.wd-color-gray {
+    color:gray;
+}
+

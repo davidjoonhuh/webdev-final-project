@@ -1,14 +1,33 @@
 import React from 'react';
-// import '../style/video.css';
+import "./index.css";
 
-const VideoItem = (props) => {
+const VideoItem = (
+    {
+        vid = {}
+ 
+    }) => {
+        const d = new Date(vid.snippet.publishTime);
+        const date = d.toLocaleDateString();
     return (
-        <div onClick={ () => props.handleVideoSelect(props.video)} className=' video-item item'>
-            <img className='ui image' src={props.video.snippet.thumbnails.medium.url} alt={props.video.snippet.description}/>
-            <div className='content'>
-                <div className='header '>{props.video.snippet.title}</div>
+        <li className="list-group-item">
+            <div className="row">
+                <div className="col-auto">
+                    <img className='ui image rounded' src={vid.snippet.thumbnails.medium.url} alt={vid.snippet.description} />
+                </div>
+                <div className="col">
+                    <div className='row wd-font-bold'>
+                        {vid.snippet.title}
+                    </div>
+                    <div className='row wd-color-gray'>
+                        {vid.snippet.channelTitle}
+                    </div>
+                    <div className='row wd-color-gray'>
+                        {date}
+                    </div>
+                </div>
             </div>
-        </div>
-    )
-};
+
+        </li>
+    );
+}
 export default VideoItem;

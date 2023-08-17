@@ -1,12 +1,22 @@
 import React from 'react';
 import VideoItem from './video-item';
+import { useSelector } from "react-redux";
 
-const VideoList = (props) => {
-    const renderedVideos =  props.videos.map((video) => {
-        return <VideoItem key={video.id.videoId} video={video} handleVideoSelect={props.handleVideoSelect} />
-        // console.log(video.id);
-    });
+const VideoList = () => {
+    const vids = useSelector(state => state.vids.vids)
 
-    return <div className='ui relaxed divided list'>{renderedVideos}</div>;
+    return(
+
+        <div className='ui relaxed divided list'>
+            <ul className="list-group">
+                {
+                    vids.map(todo => {
+                        return (<VideoItem vid={todo} />);
+                    })
+                }
+            </ul>
+        </div>
+    );
+    
 };
 export default VideoList;
