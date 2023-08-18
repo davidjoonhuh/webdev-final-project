@@ -71,7 +71,7 @@ function ProfileScreen() {
       <button
         onClick={() => {
           dispatch(logoutThunk());
-          navigate("/tuiter/login");
+          navigate("/youboxd/login");
         }}
       >
         {" "}
