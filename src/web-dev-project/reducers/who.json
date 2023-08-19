@@ -1,0 +1,22 @@
+[
+  {
+    "_id": 1,
+    "userName": "david",
+    "handle": "David Huh",
+  },
+  {
+    "_id": 2,
+    "userName": "Jinhyun",
+    "handle": "Jinhyun Hwang",
+  },
+  {
+    "_id": 3,
+    "userName": "Timothy",
+    "handle": "Timothy DeLeo",
+  },
+  {
+    "_id": 4,
+    "userName": "Jiawei",
+    "handle": "Jiawei Zhou",
+  }
+]
