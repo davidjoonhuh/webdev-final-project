@@ -12,7 +12,7 @@ function DetailsPage() {
     const [videoData, setVideoData] = useState();
     const videoId = new URLSearchParams(location.search).get('identifier')
     const convertISO8601ToSeconds = (input) => {
-
+        //taken from StackOverflow - Javascript ISO 8601 to time format HHMMSS
         var reptms = /^PT(?:(\d+)H)?(?:(\d+)M)?(?:(\d+)S)?$/;
         var hours = 0, minutes = 0, seconds = 0, totalseconds;
 
@@ -24,15 +24,21 @@ function DetailsPage() {
             totalseconds = hours * 3600 + minutes * 60 + seconds;
         }
 
-        var sec_num = parseInt(totalseconds, 10); // don't forget the second param
-        var h = Math.floor(sec_num / 3600);
-        var m = Math.floor((sec_num - (h * 3600)) / 60);
-        var s = sec_num - (h * 3600) - (m * 60);
+        var date = new Date(0);
+        date.setSeconds(totalseconds); // specify value for SECONDS here
+        var timeString = date.toISOString().substring(11, 19);
+        console.log(timeString)
+        return(timeString)
 
-        if (h < 10) { h = "0" + h; }
-        if (m < 10) { m = "0" + m; }
-        if (s < 10) { s = "0" + s; }
-        return h + ':' + m + ':' + s;
+        // var sec_num = parseInt(totalseconds, 10); // don't forget the second param
+        // var h = Math.floor(sec_num / 3600);
+        // var m = Math.floor((sec_num - (h * 3600)) / 60);
+        // var s = sec_num - (h * 3600) - (m * 60);
+
+        // if (h < 10) { h = "0" + h; }
+        // if (m < 10) { m = "0" + m; }
+        // if (s < 10) { s = "0" + s; }
+        // return h + ':' + m + ':' + s;
     }
     useEffect(() => {
         const fetchData = async () => {
