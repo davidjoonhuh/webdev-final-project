@@ -27,7 +27,6 @@ function DetailsPage() {
         var date = new Date(0);
         date.setSeconds(totalseconds); // specify value for SECONDS here
         var timeString = date.toISOString().substring(11, 19);
-        console.log(timeString)
         return(timeString)
 
         // var sec_num = parseInt(totalseconds, 10); // don't forget the second param
@@ -39,6 +38,10 @@ function DetailsPage() {
         // if (m < 10) { m = "0" + m; }
         // if (s < 10) { s = "0" + s; }
         // return h + ':' + m + ':' + s;
+    }
+    const convertTimeToDate = (input) => {
+        const d = new Date(input);
+        return d.toLocaleDateString()
     }
     useEffect(() => {
         const fetchData = async () => {
@@ -74,12 +77,18 @@ function DetailsPage() {
                                 <div className='row'>
                                     {videoData.snippet.channelTitle}
                                 </div>
-                                <div className='row wd-color-gray'>
-                                    {videoData.snippet.description}
+                                <div className='row'>
+                                    {convertTimeToDate(videoData.snippet.publishedAt)}
                                 </div>
                             </div>
                         </div>
                         <br />
+                        <div className="row">
+                            <h4>Description:</h4>
+                        </div>
+                        <div className="row">
+                            <p>{videoData.snippet.description}</p>
+                        </div>
                         <div className="row">
                             <h4>Youtube Statistics:</h4>
                         </div>
