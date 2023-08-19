@@ -26,13 +26,34 @@ export const updateUser = async (user) => {
   return response.data;
 };
 
+export const deleteUser = async (user) => {
+  const response = await api.delete(`${USERS_URL}`, user);
+  return response.data;
+};
+
 export const updateUserById = async (user) => {
   const response = await api.put(`${SERVER_API_URL}/otheruser`, user);
   return response.data;
 };
 
-export const register = async ({ username, password, firstName, lastName, role, email , phone, avatar }) => {
-  const response = await api.post(`${USERS_URL}/register`, { username, password , firstName, lastName, role, email , phone, avatar});
+export const register = async ({ username, password, firstName, lastName, role, email , phone,address}) => {
+  const response = await api.post(`${USERS_URL}/register`, { username, password , firstName, lastName, role, email , phone, address});
   const user = response.data;
   return user;
 }
+
+export const filterUsers = async ({condition, value}) => {
+  const response = await axios.get(`${USERS_URL}/searchUsers`,{params:{condition, value}});
+  console.log("users2",response.data)
+  return response.data;
+};
+
+export const getUsers = async () => {
+  const response = await axios.get(USERS_URL);
+  return response.data;
+};
+
+export const modifyUser = async (uid, user) => {
+  const response = await api.put(`${USERS_URL}/modify/${uid}`, user);
+  return response.data;
+};

@@ -1,18 +1,17 @@
 import React, {useEffect, useState} from "react";
 import {useDispatch, useSelector} from "react-redux";
 import {useNavigate} from "react-router";
-import {
-  logoutThunk,
-  profileThunk,
-  updateUserThunk
-} from "../services/auth-thunks";
-import * as tuitsService from "../web-dev-project/services/tuits-service";
-import * as whoService from "../services/who-service";
+import * as tuitsService from "../services/tuits-service";
 import {Link} from "react-router-dom";
 import { useParams } from 'react-router-dom';
+import * as whoService from "../services/who-service";
+import {logoutThunk, updateUserThunk} from "../services/auth-thunks";
 
-function UserProfile() {
-  const { userProfileId } = useParams();
+//for user role
+function UserProfileScreen() {
+  const { profileId } = useParams();
+  console.log("-------- profileId ")
+  console.log(profileId)
   const [profile, setProfile] = useState({});
   const [myTuits, setMyTuits] = useState([]);
   const [myFollowing, setMyFollowing] = useState([]);
@@ -57,7 +56,7 @@ function UserProfile() {
     };
     const fetchProfile = async () => {
       // console.log("fetchProfile-----------------")
-      const profile = await whoService.findUserById(userProfileId)
+      const profile = await whoService.findUserById(profileId)
       console.log("------------- profile in fetchProfile")
       console.log(profile)
       setProfile(profile)
@@ -78,7 +77,7 @@ function UserProfile() {
     };
     fetchProfile();
     fetchMyTuits();
-  }, [userProfileId]);
+  }, [profileId]);
 
   const handleLogout = async () => {
 
@@ -92,8 +91,8 @@ function UserProfile() {
       console.error(error);
     }
   };
-  // console.log("--------- myFollowing -----------")
-  // console.log(myFollowing)
+
+
   return (
       <div>
         <h1>Profile Screen</h1>
@@ -131,7 +130,7 @@ function UserProfile() {
                     }}
                 />
               </div>
-              {!userProfileId &&<div>
+              {!profileId &&<div>
                 <label>Email</label>
                 <input
                     className="form-control"
@@ -143,7 +142,7 @@ function UserProfile() {
                     }}
                 />
               </div>}
-              {!userProfileId && <div>
+              {!profileId && <div>
                 <label>Phone</label>
                 <input
                     className="form-control"
@@ -155,7 +154,19 @@ function UserProfile() {
                     }}
                 />
               </div>}
-              {!userProfileId && <button onClick={handleUpdate} className="btn btn-primary">
+              {!profileId &&<div>
+                <label>Address</label>
+                <input
+                    className="form-control"
+                    type="text"
+                    value={profile.address ?? ""}
+                    onChange={(event) => {
+                      const newProfile = { ...profile, address: event.target.value };
+                      setProfile(newProfile);
+                    }}
+                />
+              </div>}
+              {!profileId && <button onClick={handleUpdate} className="btn btn-primary">
                 Update
               </button>}
             </div>
@@ -230,4 +241,4 @@ function UserProfile() {
   );
 }
 
-export default UserProfile;
+export default UserProfileScreen;

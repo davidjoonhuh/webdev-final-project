@@ -21,6 +21,13 @@ export const logoutThunk = createAsyncThunk(
     }
 );
 
+export const deleteUserThunk = createAsyncThunk(
+    "user/delete", async (credentials) => {
+      const user = await authService.deleteUser(credentials);
+      return user;
+    }
+);
+
 export const updateUserThunk = createAsyncThunk(
     "user/updateUser", async (user) => {
       await authService.updateUser(user);
@@ -41,3 +48,19 @@ export const registerThunk = createAsyncThunk(
       return user;
     }
 );
+
+export const modifyUserThunk = createAsyncThunk("user/modifyUser", async (user) => {
+      await authService.modifyUser(user._id, user);
+      return user;
+    }
+);
+
+export const getUsersThunk = createAsyncThunk("users/getUsers", async () => {
+  const users = await authService.getUsers();
+  return users;
+});
+
+export const filterUsersThunk = createAsyncThunk("users/filterUsers", async (conditions) => {
+  const users = await authService.filterUsers(conditions);
+  return users;
+});

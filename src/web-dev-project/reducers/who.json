@@ -1,22 +1,59 @@
 [
   {
     "_id": 1,
-    "userName": "david",
+    "username": "mihoyo",
+    "handle": "Genshin Impact",
+    "firstName":"Genshin",
+    "lastName":"Impact",
+    "email": "genshin_cs@hoyoverse.com",
+    "phone":"000-000-0000",
+    "role":"Admin",
+    "dateofbirth":"2020-09-28"
+
+  },
+  {
+    "_id": 1,
+    "username": "David",
     "handle": "David Huh",
+    "firstName":"David",
+    "lastName":"Huh",
+    "email": "david_huh@hoyoverse.com",
+    "phone":"111-111-1111",
+    "role":"User",
+    "dateofbirth":"2023-07-03"
   },
   {
     "_id": 2,
-    "userName": "Jinhyun",
+    "username": "Jinhyun",
     "handle": "Jinhyun Hwang",
+    "firstName":"Jinhyun",
+    "lastName":"Hwang",
+    "email": "jinhyun_hwang@hoyoverse.com",
+    "phone":"222-222-2222",
+    "role":"User",
+    "dateofbirth":"2023-07-04"
   },
+
   {
     "_id": 3,
-    "userName": "Timothy",
-    "handle": "Timothy DeLeo",
+    "username": "Jiawei",
+    "handle": "Jiawei Zhou",
+    "firstName":"Jiawei",
+    "lastName":"Zhou",
+    "email": "jiawei_zhou@hoyoverse.com",
+    "phone":"333-333-3333",
+    "role":"User",
+    "dateofbirth":"2023-07-05"
   },
   {
     "_id": 4,
-    "userName": "Jiawei",
-    "handle": "Jiawei Zhou",
+    "username": "Timothy",
+    "handle": "Timothy DeLeo",
+    "firstName":"Timothy",
+    "lastName":"DeLeo",
+    "email": "timothy_deLeo@hoyoverse.com",
+    "phone":"222-222-2222",
+    "type":"User",
+    "dateofbirth":"2023-07-06"
   }
 ]
