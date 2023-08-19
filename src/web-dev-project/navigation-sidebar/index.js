@@ -4,7 +4,7 @@ import { Link, useLocation } from "react-router-dom";
 const NavigationSidebar = () => {
     const { pathname } = useLocation();
     const [ignore, youboxd, active] = pathname.split("/");
-    const links = ["search", "details", "explore", "notifications", "messages", "bookmarks", "lists", "more"];
+    const links = ["search", "explore", "notifications", "messages", "bookmarks", "lists", "more"];
 
     return (
         <div className="list-group">
