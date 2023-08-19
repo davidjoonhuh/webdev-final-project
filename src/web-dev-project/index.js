@@ -5,6 +5,7 @@ import { configureStore } from '@reduxjs/toolkit';
 import { Provider } from "react-redux";
 import videoReducer from "./reducers/video-reducer";
 import SearchPage from "./search";
+import DetailsPage from "./details";
 
 const store = configureStore(
     { reducer: { vids: videoReducer } });
@@ -21,6 +22,7 @@ function Youboxd() {
                     <div className="col-7">
                         <Routes>
                             <Route path="/search" element={<SearchPage/>} />
+                            <Route path="/details" element={<DetailsPage/>} />
                         </Routes>
                     </div>
                     <div className="col-3">

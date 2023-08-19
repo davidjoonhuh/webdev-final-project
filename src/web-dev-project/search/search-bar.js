@@ -37,7 +37,9 @@ function SearchBar() {
         //         type: "video"
         //     }
         // })
+        // console.log(response.data.items)
         // await dispatch(updateVideoArray(response.data.items))
+        
         const example = [
             {
                 "kind": "youtube#searchResult",
@@ -211,6 +213,7 @@ function SearchBar() {
             }
         ]
         await dispatch(updateVideoArray(example))
+        
     };
 
     useEffect(() => {
