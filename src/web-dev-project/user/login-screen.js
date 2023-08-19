@@ -9,7 +9,7 @@ function LoginScreen() {
     const dispatch = useDispatch();
     const handleLogin = async () => {
         try {
-           await dispatch(loginThunk({ username, password }));
+            await dispatch(loginThunk({ username, password }));
             navigate("/youboxd/profile");
         } catch (e) {
             alert(e);
