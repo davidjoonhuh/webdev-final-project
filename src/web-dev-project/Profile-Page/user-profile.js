@@ -6,7 +6,7 @@ import {
   profileThunk,
   updateUserThunk
 } from "../services/auth-thunks";
-import * as tuitsService from "../services/tuits-service";
+import * as tuitsService from "../web-dev-project/services/tuits-service";
 import * as whoService from "../services/who-service";
 import {Link} from "react-router-dom";
 import { useParams } from 'react-router-dom';
