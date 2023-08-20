@@ -8,6 +8,7 @@ function SearchPage() {
         <>
             <h2>Search Page</h2>
             <SearchBar/>
+            <br/>
             <VideoList/>
         </>
     );
