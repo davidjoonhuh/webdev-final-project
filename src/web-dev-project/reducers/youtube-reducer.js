@@ -2,10 +2,9 @@ import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
     vids: [],
-    currentVid: null
 }
 
-const videoSlice = createSlice({
+const youtubeSlice = createSlice({
     name: 'vids',
     initialState,
     reducers: {
@@ -14,5 +13,5 @@ const videoSlice = createSlice({
         },
     }
 });
-export const { updateVideoArray } = videoSlice.actions
-export default videoSlice.reducer;
+export const { updateVideoArray } = youtubeSlice.actions
+export default youtubeSlice.reducer;

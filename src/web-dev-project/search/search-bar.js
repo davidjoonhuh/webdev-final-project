@@ -3,7 +3,7 @@ import React, { useEffect, useState } from "react";
 import { useLocation, useNavigate, useParams } from "react-router-dom";
 import "./index.css";
 
-import { updateVideoArray } from "../reducers/video-reducer";
+import { updateVideoArray } from "../reducers/youtube-reducer";
 import { useDispatch } from "react-redux";
 import youtubeApi from "../youtube-api";
 
