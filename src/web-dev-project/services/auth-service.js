@@ -22,16 +22,12 @@ export const updateUser = async (user) => {
   const response = await api.put(`${USERS_URL}/${user._id}`, user);
   return response.data;
 };
-export const register = async ({ username, password, firstName, lastName }) => {
-  const response = await api.post(`${USERS_URL}/register`, {
-    username,
-    password,
-    firstName,
-    lastName,
-  });
-  const user = response.data;
-  return user;
-};
+
+export const register = async ({ username, password, firstName, lastName, role, email , phone, address }) => {
+    const response = await api.post(`${USERS_URL}/register`, { username, password , firstName, lastName, role, email , phone, address});
+    const user = response.data;
+    return user;
+}
 
 export const updateUserById = async (user) => {
   const response = await api.put(`${USERS_URL}/publicuser`, user);
