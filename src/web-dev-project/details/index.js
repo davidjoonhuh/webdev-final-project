@@ -125,6 +125,12 @@ function DetailsPage() {
                             <p><b>Definition:</b> {videoData.contentDetails.definition}</p>
                             <p><b>Dimension:</b> {videoData.contentDetails.dimension}</p>
                         </div>
+                        <div className="row">
+                            <h4>Content Details:</h4>
+                            <p><b>Duration:</b> {convertISO8601ToSeconds(videoData.contentDetails.duration)}</p>
+                            <p><b>Definition:</b> {videoData.contentDetails.definition}</p>
+                            <p><b>Dimension:</b> {videoData.contentDetails.dimension}</p>
+                        </div>
                     </div>
                 )}
             </div>
