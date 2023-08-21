@@ -62,7 +62,7 @@ function RegisterScreen() {
 
             <div className="mt-2">
                 <label>Address</label>
-                <input className="form-control" type="text" value={avatar}
+                <input className="form-control" type="text" value={address}
                     onChange={(event) => setAddress(event.target.value)} />
             </div>
 
