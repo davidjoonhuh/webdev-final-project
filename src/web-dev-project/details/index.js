@@ -5,6 +5,7 @@ import { GrView } from "react-icons/gr";
 import { FaRegThumbsUp } from "react-icons/fa6";
 import { BsChatDots } from "react-icons/bs";
 import { GrFavorite } from "react-icons/gr";
+import CommentsList from "./comments-list";
 import "./index.css";
 
 function DetailsPage() {
@@ -124,6 +125,10 @@ function DetailsPage() {
                             <p><b>Duration:</b> {convertISO8601ToSeconds(videoData.contentDetails.duration)}</p>
                             <p><b>Definition:</b> {videoData.contentDetails.definition}</p>
                             <p><b>Dimension:</b> {videoData.contentDetails.dimension}</p>
+                        </div>
+                        <div className="row">
+                            <h4>Comments</h4>
+                            <CommentsList vId={videoId}/>
                         </div>
                     </div>
                 )}
