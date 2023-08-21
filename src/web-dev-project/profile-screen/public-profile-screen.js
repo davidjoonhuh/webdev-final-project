@@ -188,7 +188,8 @@ function PublicProfileScreen() {
                 <li className="list-group-item">
                   <div>
                     <i className="fa-solid fa-user"></i>
-                    <span className="fw-bolder">🎈 Followers: </span>
+                    <span className="fw-bolder">🎈 Followers: </span>{myFollowers.length
+                      ?? ""}
                   </div>
                 </li>
                 {myFollowers.map((user) => (
