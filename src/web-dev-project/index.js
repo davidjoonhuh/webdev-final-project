@@ -10,12 +10,14 @@ import ProfileScreen from "./user/profile-screen";
 import LoginScreen from "./user/login-screen";
 import RegisterScreen from "./user/register-screen";
 import authReducer from "./reducers/auth-reducer";
+import videosReducer from "./reducers/videos-reducer";
 
 
 const store = configureStore({
     reducer: { 
         vids: youtubeReducer,
-        user: authReducer
+        user: authReducer,
+        videos: videosReducer
     }
 });
 function Youboxd() {

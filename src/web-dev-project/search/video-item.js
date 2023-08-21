@@ -1,9 +1,13 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import "./index.css";
 import { AiFillStar } from "react-icons/ai";
 import youtubeApi from "../youtube-api";
 import { useNavigate } from "react-router-dom";
-
+import { useDispatch, useSelector } from "react-redux";
+import { videoLikedToggle } from '../reducers/videos-reducer';
+import { findVideosThunk } from '../services/videos-thunks';
+import { videoLikedUserToggle } from '../reducers/auth-reducer';
+import { updateUserThunk } from '../services/auth-thunks';
 
 const VideoItem = (
     {
@@ -13,13 +17,38 @@ const VideoItem = (
     const d = new Date(vid.snippet.publishTime);
     const date = d.toLocaleDateString();
     const navigate = useNavigate();
+    const dispatch = useDispatch();
+    const { videos, loading } = useSelector(state => state.videos)
+    const [vids, setVid] = useState(videos);
+    const { currentUser } = useSelector((state) => state.user);
+    //const [profile, setProfile] = useState(currentUser);
+
+
+    const toggleVideoLiked = async (obj) => {
+        //console.log("hi")
+        console.log(vids)
+        await dispatch(videoLikedToggle(obj))
+        await dispatch(videoLikedUserToggle(obj))
+        
+        // console.log(action1.payload)
+        // console.log(currentUser)
+        console.log(currentUser)
+        console.log(vids)
+        //await dispatch(updateUserThunk(currentUser));
+        //console.log(action.payload)
+        //console.log(currentUser)
+        //setProfile(action.payload)
+    }
     const handleVideoSelect = async (id) => {
         navigate("/youboxd/details?identifier=" + id);
     }
+    useEffect(() => {
+        dispatch(findVideosThunk())
+    }, [])
     return (
         <li className="list-group-item">
             <div className="row">
-                
+
                 <div className="col-auto" style={{ "cursor": "pointer" }} onClick={() => handleVideoSelect(vid.id.videoId)}>
                     <img className='ui image rounded' src={vid.snippet.thumbnails.medium.url} alt={vid.snippet.description} />
                 </div>
@@ -34,9 +63,9 @@ const VideoItem = (
                         {date}
                     </div>
                 </div>
-                <div style={{ "cursor": "pointer" }}  className="col-auto" > 
-                {/* onClick={() => toggleTuitLiked(tuit)} */}
-                    <AiFillStar className="text-primary"/>
+                <div style={{ "cursor": "pointer" }} onClick={() => toggleVideoLiked({ "videoId": vid.id.videoId, "user": currentUser })} className="col-auto" >
+                    {/* onClick={() => toggleTuitLiked(tuit)} */}
+                    <AiFillStar className="text-primary" />
                 </div>
             </div>
 

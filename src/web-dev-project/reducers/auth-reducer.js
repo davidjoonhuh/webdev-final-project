@@ -5,7 +5,14 @@ import { loginThunk, logoutThunk, profileThunk, updateUserThunk, registerThunk }
 const authSlice = createSlice({
     name: "auth",
     initialState: { currentUser: null },
-    reducers: {},
+    reducers: {
+        videoLikedUserToggle(state, action)  {
+            const currentUser = state.currentUser
+            console.log("DHJIASDHIASD")
+            // currentUser.liked.indexOf(action.payload.videoId) === -1 ? console.log("Not in array") : currentUser.liked = []
+            currentUser.liked.indexOf(action.payload.videoId) === -1 ? currentUser.liked.push(action.payload.videoId) : currentUser.liked.splice(currentUser.liked.indexOf(action.payload.videoId), 1)
+        }
+    },
     extraReducers: {
         [logoutThunk.fulfilled]: (state) => {
             state.currentUser = null;
@@ -30,4 +37,5 @@ const authSlice = createSlice({
         },
     },
 });
+export const { videoLikedUserToggle } = authSlice.actions
 export default authSlice.reducer;

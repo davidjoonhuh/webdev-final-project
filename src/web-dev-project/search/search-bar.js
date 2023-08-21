@@ -4,6 +4,7 @@ import { useLocation, useNavigate, useParams } from "react-router-dom";
 import "./index.css";
 
 import { updateVideoArray } from "../reducers/youtube-reducer";
+import { createVideo } from "../reducers/videos-reducer";
 import { useDispatch } from "react-redux";
 import youtubeApi from "../youtube-api";
 
@@ -37,8 +38,8 @@ function SearchBar() {
                 type: "video"
             }
         })
-        console.log(response.data.items)
         await dispatch(updateVideoArray(response.data.items))
+        // await dispatch(createVideo("PPH8Y6sOLcE"))
         
         // const example = [
         //     {
