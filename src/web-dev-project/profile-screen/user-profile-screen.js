@@ -15,17 +15,13 @@ function UserProfileScreen() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
+    const loadProfile = async () => {
+    const action = await dispatch(profileThunk());
+
+    setProfile(action.payload);
+  };
+  
   useEffect(() => {
-    const fetchProfile = async () => {
-      try {
-        const {payload} = await dispatch(profileThunk());
-        console.log(payload)
-        setProfile(payload);
-      } catch (error) {
-        console.error(error);
-        navigate("/login");
-      }
-    };
     const fetchMyFollowing = async () => {
       try {
         let followingIds = !profile.following ? [] : profile.following;
@@ -65,7 +61,7 @@ function UserProfileScreen() {
         console.error(error);
       }
     };
-    // fetchProfile();
+    loadProfile();
     fetchMyFollowing();
     fetchMyFollowers();
     fetchMyLikes();
