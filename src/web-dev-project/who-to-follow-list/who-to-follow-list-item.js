@@ -111,7 +111,7 @@ const WhoToFollowListItem = ({whoToFollow}) => {
       <li className="list-group-item">
         <div className="row">
           <div className="col-9">
-            <Link className="nav-link" to={"/tuiter/profile/"+whoToFollow._id}
+            <Link className="nav-link" to={"/youboxd/profile/"+whoToFollow._id}
                   style={{ textDecoration: 'underline'}}>
               <i className="fa-solid fa-heart"></i>   {whoToFollow.firstName} {whoToFollow.lastName}</Link>
 
