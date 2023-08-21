@@ -27,3 +27,16 @@ export const registerThunk = createAsyncThunk(
         const user = await authService.register(credentials);
         return user;
     });
+
+export const updateUserByIdThunk = createAsyncThunk(
+    "user/updateUserById", async ({user, uid}) => {
+      await authService.updateUserById({user, uid});
+      return user;
+    }
+);
+
+export const deleteUserThunk = createAsyncThunk(
+    "user/deleteUser", async (user) => {
+      await authService.deleteUser(user);
+      return user;
+    });
