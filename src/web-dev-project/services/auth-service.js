@@ -32,3 +32,13 @@ export const register = async ({ username, password, firstName, lastName }) => {
   const user = response.data;
   return user;
 };
+
+export const updateUserById = async (user) => {
+  const response = await api.put(`${USERS_URL}/publicuser`, user);
+  return response.data;
+};
+
+export const deleteUser = async (user) => {
+  const response = await api.delete(`${USERS_URL}/${user._id}`, user);
+  return response.data;
+};
