@@ -10,10 +10,15 @@ import ProfileScreen from "./user/profile-screen";
 import LoginScreen from "./user/login-screen";
 import RegisterScreen from "./user/register-screen";
 import authReducer from "./reducers/auth-reducer";
+import WhoToFollowList from "./who-to-follow-list";
+import whoReducer from "./reducers/who-reducer";
+import UserProfileScreen from "./profile-screen/user-profile-screen";
+import PublicProfileScreen from "./profile-screen/public-profile-screen";
 
 
 const store = configureStore({
     reducer: { 
+        whoToFollowList: whoReducer,
         vids: youtubeReducer,
         user: authReducer
     }
@@ -33,11 +38,14 @@ function Youboxd() {
                             <Route path="/details" element={<DetailsPage/>} />
                             <Route path="/login" element={<LoginScreen />} />
                             <Route path="/register" element={<RegisterScreen />} />
-                            <Route path="/profile" element={<ProfileScreen />} />
+                            // <Route path="/profile" element={<ProfileScreen />} />
+                            <Route path="/profile" element={<UserProfileScreen/>}/>
+                            <Route path="/profile/:profileId" element={<PublicProfileScreen/>} />
                         </Routes>
                     </div>
-                    <div className="col-3">
-                    </div>
+                   <div
+                    className="d-none d-lg-block col-lg-4 col-xl-3">
+                    <WhoToFollowList /></ div>
                 </div>
             </div>
         </Provider>
