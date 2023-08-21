@@ -66,7 +66,7 @@ function PublicProfileScreen() {
   const handleLogout = async () => {
 
     await dispatch(logoutThunk());
-    navigate("../login");
+    navigate("/youboxd/login");
   };
   const handleUpdate = async () => {
     try {
