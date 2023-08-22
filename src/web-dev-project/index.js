@@ -10,17 +10,18 @@ import ProfileScreen from "./user/profile-screen";
 import LoginScreen from "./user/login-screen";
 import RegisterScreen from "./user/register-screen";
 import authReducer from "./reducers/auth-reducer";
+import commentsReducer from "./reducers/comments-reducer";
 import WhoToFollowList from "./who-to-follow-list";
 import whoReducer from "./reducers/who-reducer";
 import UserProfileScreen from "./profile-screen/user-profile-screen";
 import PublicProfileScreen from "./profile-screen/public-profile-screen";
 
-
 const store = configureStore({
     reducer: { 
         whoToFollowList: whoReducer,
         vids: youtubeReducer,
-        user: authReducer
+        user: authReducer,
+        comments: commentsReducer
     }
 });
 function Youboxd() {
