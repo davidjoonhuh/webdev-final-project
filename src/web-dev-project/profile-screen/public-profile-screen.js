@@ -81,6 +81,14 @@ function PublicProfileScreen() {
         <h1>❤Welcome to My Profile Screen❤</h1>
         {profile && (
             <div>
+             <div>
+              <div style={{ border: '1px solid black', padding: '10px' }}>
+                {myFollowers.length >= 5 ? (
+                    <span style={{ color: 'blue' }}>  This is Youboxd's Verified User☑️☑️☑️</span>
+                ) : (
+                    <span style={{ color: 'red' }}>  This is a normal User!🚩🚩🚩</span>
+                )}
+              </div>
               <div>
                 <label>🌸Username🌸</label>
                 <input
