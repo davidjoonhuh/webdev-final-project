@@ -2,7 +2,6 @@ import React, { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { useNavigate } from "react-router";
 import { profileThunk, logoutThunk, updateUserThunk } from "../services/auth-thunks";
-import { deleteTuitThunk } from "../services/tuits-thunks";
 import * as whoService from "../services/who-service";
 import {Link} from "react-router-dom";
 
@@ -78,9 +77,6 @@ function UserProfileScreen() {
       console.error(error);
     }
   };
-  const deleteTuitHandler = async (id) => {
-    await dispatch(deleteTuitThunk(id));
-  }
   if (!profile) {
     return (
         <div>

@@ -1,5 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { createCommentThunk, findCommentsThunk, findUserCommentsThunk, findVideoCommentsThunk, deleteCommentThunk } from "../services/comments-thunks"
+import { createCommentThunk, findCommentsThunk, findUserCommentsThunk, findVideoCommentsThunk } from "../services/comments-thunks"
 
 const initialState = {
     comments: [],

@@ -9,6 +9,7 @@ const WhoToFollowList = () => {
   useEffect(() => {
     dispatch(findWhoToFollowListThunk())
   }, [dispatch])
+  console.log(whoToFollowList)
   return (
       <ul className="list-group">
         <li className="list-group-item">
