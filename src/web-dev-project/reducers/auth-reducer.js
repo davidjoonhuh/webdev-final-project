@@ -7,10 +7,10 @@ const authSlice = createSlice({
     initialState: { currentUser: null },
     reducers: {
         videoLikedUserToggle(state, action)  {
-            const currentUser = state.currentUser
-            console.log("DHJIASDHIASD")
+            // const currentUser = state.currentUser
+            // console.log("DHJIASDHIASD")
             // currentUser.liked.indexOf(action.payload.videoId) === -1 ? console.log("Not in array") : currentUser.liked = []
-            currentUser.liked.indexOf(action.payload.videoId) === -1 ? currentUser.liked.push(action.payload.videoId) : currentUser.liked.splice(currentUser.liked.indexOf(action.payload.videoId), 1)
+            state.currentUser.liked.indexOf(action.payload.videoId) === -1 ? state.currentUser.liked.push(action.payload.videoId) : state.currentUser.liked.splice(state.currentUser.liked.indexOf(action.payload.videoId), 1)
         }
     },
     extraReducers: {

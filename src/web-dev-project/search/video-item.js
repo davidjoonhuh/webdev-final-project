@@ -25,16 +25,15 @@ const VideoItem = (
 
 
     const toggleVideoLiked = async (obj) => {
-        //console.log("hi")
-        console.log(vids)
         await dispatch(videoLikedToggle(obj))
-        await dispatch(videoLikedUserToggle(obj))
-        
-        // console.log(action1.payload)
-        // console.log(currentUser)
+        const action = await dispatch(videoLikedUserToggle(obj))
+        console.log(action.payload)
+        console.log("Before updateUserThunk")
         console.log(currentUser)
         console.log(vids)
-        //await dispatch(updateUserThunk(currentUser));
+        // await dispatch(updateUserThunk(action.payload.user));
+        console.log("After updateUserThunk")
+        console.log(currentUser)
         //console.log(action.payload)
         //console.log(currentUser)
         //setProfile(action.payload)

@@ -5,14 +5,14 @@ import { findVideosThunk } from '../services/videos-thunks';
 
 const VideoList = () => {
     const vids = useSelector(state => state.vids.vids)
-    console.log(vids)
+    // console.log(vids)
     const videos = useSelector(state => state.videos)
-    console.log(videos)
+    // console.log(videos)
 
     const dispatch = useDispatch();
     useEffect(() => {
         dispatch(findVideosThunk())
-    }, [])
+    }, [dispatch])
 
     return(
         <div className='ui relaxed divided list'>
