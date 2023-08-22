@@ -11,6 +11,7 @@ const authSlice = createSlice({
             // console.log("DHJIASDHIASD")
             // currentUser.liked.indexOf(action.payload.videoId) === -1 ? console.log("Not in array") : currentUser.liked = []
             state.currentUser.liked.indexOf(action.payload.videoId) === -1 ? state.currentUser.liked.push(action.payload.videoId) : state.currentUser.liked.splice(state.currentUser.liked.indexOf(action.payload.videoId), 1)
+            
         }
     },
     extraReducers: {
