@@ -213,18 +213,6 @@ function PublicProfileScreen() {
                       </Link>
                     </li>
                 ))}
-                {/*<Link className="nav-link"*/}
-                {/*      to="/tuiter/profile/456"*/}
-                {/*      style={{textDecoration: 'underline', color: 'blue'}}>*/}
-                {/*  <i className="fa-solid fa-arrow-right"></i>*/}
-                {/*  David Beckham*/}
-                {/*</Link>*/}
-                {/*<Link className="nav-link"*/}
-                {/*      to="/tuiter/profile/567"*/}
-                {/*      style={{textDecoration: 'underline', color: 'blue'}}>*/}
-                {/*  <i className="fa-solid fa-arrow-right"></i>*/}
-                {/*  Elon Musk*/}
-                {/*</Link>*/}
               </ul>
             </div>
           </div>
