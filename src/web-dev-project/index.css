@@ -1,0 +1,133 @@
+.wd-news-content {
+  margin-top: 5px;
+  margin-bottom: 5px;
+}
+
+.wd-margin-left {
+  margin-left: 16px;
+}
+
+.wd-margin-bottom {
+  margin-bottom: 12px;
+}
+
+.wd-margin-top {
+  margin-top: 12px;
+}
+
+.wd-margin-right {
+  margin-right: 12px;
+}
+
+.wd-flex-container-flex {
+  display: flex;
+}
+
+.wd-photo-side {
+  width: 60px;
+  height: 48px;
+}
+
+.wd-user-img {
+  border-radius: 50px;
+  width: 48px;
+  height: 48px;
+}
+
+.wd-username {
+  font-size: 15px;
+  font-weight: bold;
+}
+
+.wd-content-side {
+  width: 100%
+}
+
+.wd-user-handler {
+  font-size: 15px;
+  color: rgb(110, 118, 125);
+  margin-left: 5px;
+}
+
+.wd-font-family {
+  font-family: Arial;
+}
+
+.wd-gray-dotdotdot {
+  float: right;
+  color: rgb(110, 118, 125);
+  margin-right: 16px;
+
+}
+
+.wd-content {
+  font-size: 15px;
+
+}
+
+.wd-sharing-photo {
+  margin-top: 12px;
+}
+
+.wd-link-part {
+  width: 504px;
+  display: block;
+  margin-left: auto;
+}
+
+.wd-link-photo {
+  margin-top: 10px;
+  width: 95%;
+  height: 264px;
+  border-radius: 20px;
+  display: block;
+}
+
+.wd-normal-content {
+  font-size: 15px;
+
+  font-weight: bold;
+  margin-left: 16px;
+  margin-right: 12px;
+  margin-top: 12px;
+}
+
+.wd-light-content {
+  font-size: 15px;
+  color: rgb(110, 118, 125);
+  margin-left: 16px;
+  margin-right: 12px;
+  margin-bottom: 12px;
+}
+
+.wd-icon-part {
+  display: flex;
+  justify-content: space-evenly;
+  margin-bottom: 12px;
+  margin-top: 12px;
+}
+
+.wd-link-icon {
+  text-decoration: none;
+  color: rgb(110, 118, 125);
+  font-size: 18px;
+}
+
+.wd-border-around {
+  border-color: #dcddde;
+  border-width: 1px 1px 1px 1px;
+  border-style: solid;
+  width: 100%;
+}
+
+.wd-checked {
+  margin-left: 3px;
+  margin-bottom: 3px;
+  color: dodgerblue;
+}
+
+.background-image {
+  background-image: url("./background.jpg");
+  background-size: cover;
+  background-position: center;
+}
