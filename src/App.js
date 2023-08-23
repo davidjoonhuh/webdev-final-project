@@ -3,7 +3,7 @@ import { BrowserRouter } from "react-router-dom";
 import { Routes, Route, Navigate } from "react-router";
 import Youboxd from './web-dev-project';
 import SearchPage from './web-dev-project/search';
-import AdminProfileScreen from './admin-profile-screen';
+import AdminProfileScreen from './web-dev-project/profile-screen/admin-profile-screen';
 
 function App() {
     return (
