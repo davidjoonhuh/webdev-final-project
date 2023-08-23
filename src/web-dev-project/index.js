@@ -16,6 +16,7 @@ import WhoToFollowList from "./who-to-follow-list";
 import whoReducer from "./reducers/who-reducer";
 import UserProfileScreen from "./profile-screen/user-profile-screen";
 import PublicProfileScreen from "./profile-screen/public-profile-screen";
+import adminReducer from "./reducers/admin-reducer";
 
 const store = configureStore({
     reducer: { 
@@ -23,7 +24,8 @@ const store = configureStore({
         vids: youtubeReducer,
         user: authReducer,
         comments: commentsReducer,
-        users: usersReducer
+        users: usersReducer,
+        admin: adminReducer
     }
 });
 function Youboxd() {
