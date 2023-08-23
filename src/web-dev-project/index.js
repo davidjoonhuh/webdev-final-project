@@ -6,6 +6,7 @@ import { Provider } from "react-redux";
 import youtubeReducer from "./reducers/youtube-reducer";
 import SearchPage from "./search";
 import DetailsPage from "./details";
+import HomeScreen from "./home/home-screen";
 import ProfileScreen from "./user/profile-screen";
 import LoginScreen from "./user/login-screen";
 import RegisterScreen from "./user/register-screen";
