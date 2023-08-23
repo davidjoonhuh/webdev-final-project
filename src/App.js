@@ -3,6 +3,7 @@ import { BrowserRouter } from "react-router-dom";
 import { Routes, Route, Navigate } from "react-router";
 import Youboxd from './web-dev-project';
 import SearchPage from './web-dev-project/search';
+import AdminProfileScreen from './admin-profile-screen';
 
 function App() {
     return (
@@ -11,6 +12,7 @@ function App() {
                 <Routes>
                     <Route path="/" element={<Navigate to="/youboxd" />} />
                     <Route path="/youboxd/*" element={<Youboxd />} />
+                    <Route path="/admin/*" element={<AdminProfileScreen />} />
 
                 </Routes>
             </div>
