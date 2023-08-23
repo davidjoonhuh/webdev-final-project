@@ -1,69 +1,39 @@
-import React, { useEffect, useState } from 'react';
-import { Redirect } from 'react-router-dom';
+import React, { useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { fetchAllUsersThunk, adminDeleteUserByIdThunk } from './admin-thunks';
 
 const AdminProfileScreen = () => {
-  const [users, setUsers] = useState([
-    // Dummy users data
-    { id: 1, username: 'Alice' },
-    { id: 2, username: 'Bob' },
-  ]);
-
-  const [comments, setComments] = useState([
-    // Dummy comments data
-    { id: 1, text: 'Nice post!' },
-    { id: 2, text: 'Interesting!' },
-  ]);
-
-  const isAdmin = () => {
-    const { currentUser } = useSelector((state) => state.user);
-    return currentUser.isAdmin;
-  };
-
-  const deleteUser = (id) => {
-    setUsers(users.filter(user => user.id !== id));
-  };
-
-  const deleteComment = (id) => {
-    setComments(comments.filter(comment => comment.id !== id));
-  };
-
+  const dispatch = useDispatch();
+  
+  // Fetch all users when the component mounts
   useEffect(() => {
-    // Fetch admin data here if needed
-  }, []);
+    dispatch(fetchAllUsersThunk());
+  }, [dispatch]);
 
-  if (!isAdmin()) {
-    return <Redirect to="/login" />;
-  }
+  // Grab the relevant slices of state from your Redux store
+  const allUsers = useSelector(state => state.admin.allUsers);
+  const isLoading = useSelector(state => state.admin.loading);
+  const error = useSelector(state => state.admin.error);
+
+  const handleDeleteUser = (id) => {
+    dispatch(adminDeleteUserByIdThunk(id));
+  };
 
   return (
     <div>
-      <h1>Admin Profile Screen</h1>
-
+      <h1>Admin Profile</h1>
       <div>
-        <h2>User Management</h2>
+        {isLoading && <p>Loading...</p>}
+        {error && <p>Error: {error.message}</p>}
+        <h2>All Users:</h2>
         <ul>
-          {users.map(user => (
+          {allUsers.map(user => (
             <li key={user.id}>
-              {user.username} <button onClick={() => deleteUser(user.id)}>Delete User</button>
+              {user.name} - {user.email}
+              <button onClick={() => handleDeleteUser(user.id)}>Delete</button>
             </li>
           ))}
         </ul>
-      </div>
-
-      <div>
-        <h2>Content Management</h2>
-        <ul>
-          {comments.map(comment => (
-            <li key={comment.id}>
-              {comment.text} <button onClick={() => deleteComment(comment.id)}>Delete Comment</button>
-            </li>
-          ))}
-        </ul>
-      </div>
-
-      <div>
-        <h2>Analytics</h2>
-        {/* Display site usage statistics */}
       </div>
     </div>
   );
