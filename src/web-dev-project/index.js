@@ -3,6 +3,7 @@ import { Routes, Route } from "react-router";
 import NavigationSidebar from "./navigation-sidebar";
 import { configureStore } from '@reduxjs/toolkit';
 import { Provider } from "react-redux";
+import { useSelector } from 'react-redux';
 import youtubeReducer from "./reducers/youtube-reducer";
 import SearchPage from "./search";
 import DetailsPage from "./details";
@@ -17,6 +18,8 @@ import whoReducer from "./reducers/who-reducer";
 import UserProfileScreen from "./profile-screen/user-profile-screen";
 import PublicProfileScreen from "./profile-screen/public-profile-screen";
 import adminReducer from "./reducers/admin-reducer";
+import AdminProfileScreen from './profile-screen/admin-profile-screen';
+
 
 const store = configureStore({
     reducer: { 
@@ -29,6 +32,9 @@ const store = configureStore({
     }
 });
 function Youboxd() {
+
+    const isAdmin = useSelector(state => state.users.user.isAdmin);
+
     return (
         <Provider store={store}>
 
@@ -45,6 +51,7 @@ function Youboxd() {
                             <Route path="/register" element={<RegisterScreen />} />
                             // <Route path="/profile" element={<ProfileScreen />} />
                             <Route path="/profile" element={<UserProfileScreen/>}/>
+                            <Route path="/profile" element={isAdmin ? <AdminProfileScreen /> : <UserProfileScreen />} />
                             <Route path="/profile/:profileId" element={<PublicProfileScreen/>} />
                         </Routes>
                     </div>

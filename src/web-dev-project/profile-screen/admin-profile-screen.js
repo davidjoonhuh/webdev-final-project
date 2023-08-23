@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { fetchAllUsersThunk, adminDeleteUserByIdThunk } from './admin-thunks';
+import { fetchAllUsersThunk, adminDeleteUserByIdThunk } from '../services/admin-thunks';
 
 const AdminProfileScreen = () => {
   const dispatch = useDispatch();
