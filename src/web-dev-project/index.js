@@ -7,6 +7,7 @@ import { useSelector } from 'react-redux';
 import youtubeReducer from "./reducers/youtube-reducer";
 import SearchPage from "./search";
 import DetailsPage from "./details";
+import HomeScreen from "./home-screen";
 import ProfileScreen from "./user/profile-screen";
 import LoginScreen from "./user/login-screen";
 import RegisterScreen from "./user/register-screen";
@@ -45,6 +46,7 @@ function Youboxd() {
                     </div>
                     <div className="col-7">
                         <Routes>
+                            <Route path="/home" element={<HomeScreen/>}/>
                             <Route path="/search" element={<SearchPage/>} />
                             <Route path="/details" element={<DetailsPage/>} />
                             <Route path="/login" element={<LoginScreen />} />

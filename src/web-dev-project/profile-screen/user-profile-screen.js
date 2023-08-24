@@ -8,6 +8,7 @@ import {Link} from "react-router-dom";
 function UserProfileScreen() {
   const {currentUser} = useSelector((state) => state.user);
   const [profile, setProfile] = useState(currentUser);
+  const [selectedColor, setSelectedColor] = useState([]);
   const [myFollowing, setMyFollowing] = useState([]);
   const [myFollowers, setMyFollowers] = useState([]);
   const [myLikes, setMyLikes] = useState([]);
@@ -70,9 +71,15 @@ function UserProfileScreen() {
     await dispatch(logoutThunk());
     navigate("/youboxd/login");
   };
-  const handleUpdate = async () => {
+
+   const handleUpdate = async () => {
     try {
-      await dispatch(updateUserThunk(profile));
+      const updatedProfile = {
+        ...profile,
+        color: selectedColor,
+      };
+      await dispatch(updateUserThunk(updatedProfile));
+      setProfile(updatedProfile);
     } catch (error) {
       console.error(error);
     }
@@ -86,6 +93,13 @@ function UserProfileScreen() {
     );
   }
 
+  const shouldShowColorSelection = myFollowers.length >= 5;
+  const colorChoices = [
+    { name: 'Black', color: 'black' },
+    { name: 'Red', color: 'red' },
+    { name: 'Blue', color: 'blue' },
+  ];
+  
   return (
       <div>
         <h1>❤User Profile Page❤️</h1>
@@ -98,14 +112,36 @@ function UserProfileScreen() {
                     <span style={{ color: 'red' }}>  This is a normal User!🚩🚩🚩</span>
                 )}
               </div>
-              <div>
-                <label>🌸Username🌸</label>
+                <div>
+                <label style={{ color: profile.color ?? 'black' }}>🌸Username🌸</label>
                 <input
                     className="form-control"
                     type="text"
-                    value={profile.username} readOnly
+                    value={profile.username}
                 />
               </div>
+
+                    <div>
+                {shouldShowColorSelection && (
+                    <div>
+                      <label>🏷️🏷️🏷️Choose Your Username's Color(Only for Verified User!)：</label>
+                      <select
+                          value={selectedColor}
+                          onChange={(event) => setSelectedColor(event.target.value)}
+                      >
+                        {colorChoices.map((choice) => (
+                            <option key={choice.color} value={choice.color}>
+                              {choice.name}
+                            </option>
+                        ))}
+                      </select>
+                      <button onClick={handleUpdate} className="btn btn-primary mt-2">
+                        Update Color
+                      </button>
+                    </div>
+                )}
+              </div>
+              <br/>
               <div>
                 <div className="row">
                   <div className="col">
