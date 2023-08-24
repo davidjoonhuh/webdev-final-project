@@ -4,7 +4,7 @@ import { loginThunk, logoutThunk, profileThunk, updateUserThunk, registerThunk }
 
 const authSlice = createSlice({
     name: "auth",
-    initialState: { currentUser: null },
+    initialState: { currentUser: {isAdmin: false} },
     reducers: {},
     extraReducers: {
         [logoutThunk.fulfilled]: (state) => {

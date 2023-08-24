@@ -2,11 +2,12 @@ import { createSlice } from "@reduxjs/toolkit";
 import { findUserByIdThunk } from "../services/users-thunks";
 const initialState = {
     user: null,
-    loading: false
+    loading: false,
+    error: null
 }
 
-const commentsSlice = createSlice({
-    name: 'comments',
+const usersSlice = createSlice({
+    name: 'users',
     initialState,
     extraReducers: {
         [findUserByIdThunk.fulfilled]:
@@ -15,16 +16,16 @@ const commentsSlice = createSlice({
                 state.user = payload;
             },
         [findUserByIdThunk.pending]:
-            (state, { payload }) => {
+            (state) => {
                 state.loading = true;
-                state.payload = null;
+                state.user = null;
             },
         [findUserByIdThunk.rejected]:
             (state, action) => {
                 state.loading = false;
-                state.comments = action.error;
+                state.error = action.error;
             }
     }
 })
 
-export default commentsSlice.reducer
+export default usersSlice.reducer
