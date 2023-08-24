@@ -6,7 +6,6 @@ import {
   profileThunk,
   updateUserThunk
 } from "../services/auth-thunks";
-import * as tuitsService from "../services/tuits-service";
 import * as whoService from "../services/who-service";
 import {Link} from "react-router-dom";
 import {useParams} from 'react-router-dom';
@@ -16,7 +15,6 @@ function PublicProfileScreen() {
   console.log("-------- profileId ")
   console.log(profileId)
   const [profile, setProfile] = useState({});
-  const [myTuits, setMyTuits] = useState([]);
   const [myFollowing, setMyFollowing] = useState([]);
   const [myFollowers, setMyFollowers] = useState([]);
 
@@ -31,7 +29,6 @@ function PublicProfileScreen() {
         let following = await Promise.all(
             followingIds.map(async followingId => {
               const following = await whoService.findUserById(followingId)
-              // console.log(following)
               return following;
             }))
         console.log("myfollowing:")
@@ -47,7 +44,6 @@ function PublicProfileScreen() {
       try {
         let follower = await Promise.all(followerIds.map(async followerId => {
           const follower = await whoService.findUserById(followerId)
-          // console.log(follower)
           return follower;
         }))
         console.log("myfollowers:")
@@ -58,28 +54,14 @@ function PublicProfileScreen() {
       }
     };
     const fetchProfile = async () => {
-      // console.log("fetchProfile-----------------")
       const profile = await whoService.findUserById(profileId)
       console.log("------------- profile in fetchProfile")
       console.log(profile)
       setProfile(profile)
-
       await fetchMyFollowing(profile.following);
       await fetchMyFollowers(profile.followers);
     };
-    const fetchMyTuits = async () => {
-      // console.log("fetchMyTuits====================")
-      try {
-        // console.log(profile)
-        const tuits = await tuitsService.findOtherTuits(profileId);
-        // console.log("profile myTuit:" + tuits)
-        setMyTuits(tuits);
-      } catch (error) {
-        console.error(error);
-      }
-    };
     fetchProfile();
-    fetchMyTuits();
   }, [profileId]);
 
   const handleUpdate = async () => {
@@ -195,7 +177,7 @@ function PublicProfileScreen() {
                     <li className="list-group-item" key={user._id}>
                       <Link
                           className="nav-link"
-                          to={"/youboxd/profile/" + user._id}
+                          to={"/tuiter/profile/" + user._id}
                           style={{
                             textDecoration: 'underline',
                             color: 'black',
@@ -221,7 +203,7 @@ function PublicProfileScreen() {
                     <li className="list-group-item" key={user._id}>
                       <Link
                           className="nav-link"
-                          to={"/youboxd/profile/" + user._id}
+                          to={"/tuiter/profile/" + user._id}
                           style={{
                             textDecoration: 'underline',
                             color: 'black',
