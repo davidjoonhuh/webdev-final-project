@@ -177,7 +177,7 @@ function PublicProfileScreen() {
                     <li className="list-group-item" key={user._id}>
                       <Link
                           className="nav-link"
-                          to={"/tuiter/profile/" + user._id}
+                          to={"/youboxd/profile/" + user._id}
                           style={{
                             textDecoration: 'underline',
                             color: 'black',
@@ -203,7 +203,7 @@ function PublicProfileScreen() {
                     <li className="list-group-item" key={user._id}>
                       <Link
                           className="nav-link"
-                          to={"/tuiter/profile/" + user._id}
+                          to={"/youboxd/profile/" + user._id}
                           style={{
                             textDecoration: 'underline',
                             color: 'black',
