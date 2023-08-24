@@ -1,9 +1,11 @@
-import React, { useState, useEffect } from "react";
-import { useSelector, useDispatch } from "react-redux";
-import { useNavigate } from "react-router";
-import { profileThunk, logoutThunk, updateUserThunk } from "../services/auth-thunks";
-import { deleteTuitThunk } from "../services/tuits-thunks";
-import * as tuitsService from "../services/tuits-service";
+import React, {useState, useEffect} from "react";
+import {useSelector, useDispatch} from "react-redux";
+import {useNavigate} from "react-router";
+import {
+  profileThunk,
+  logoutThunk,
+  updateUserThunk
+} from "../services/auth-thunks";
 import * as whoService from "../services/who-service";
 import {Link} from "react-router-dom";
 
@@ -11,13 +13,10 @@ function UserProfileScreen() {
   const {currentUser} = useSelector((state) => state.user);
   const [selectedColor, setSelectedColor] = useState([]);
   const [profile, setProfile] = useState(currentUser);
-  const [myTuits, setMyTuits] = useState([]);
   const [myFollowing, setMyFollowing] = useState([]);
   const [myFollowers, setMyFollowers] = useState([]);
-  const [myLikes, setMyLikes] = useState([]);
   const dispatch = useDispatch();
   const navigate = useNavigate();
-
 
   const loadProfile = async () => {
     const action = await dispatch(profileThunk());
@@ -26,16 +25,7 @@ function UserProfileScreen() {
   };
 
   useEffect(() => {
-
     loadProfile();
-    const fetchMyTuits = async () => {
-      try {
-        const tuits = await tuitsService.findMyTuits();
-        setMyTuits(tuits);
-      } catch (error) {
-        console.error(error);
-      }
-    };
     const fetchMyFollowing = async () => {
       try {
         let followingIds = !profile.following ? [] : profile.following;
@@ -62,25 +52,9 @@ function UserProfileScreen() {
         console.error(error);
       }
     };
-    const fetchMyLikes = async () => {
-      try {
-        let tuitsId = !profile.likes ? [] : profile.likes;
-        let likeTuits = await Promise.all(tuitsId.map(async id => {
-          const tuit = await whoService.findUserById(id)
-          // console.log(follower)
-          return tuit;
-        }))
-        setMyLikes(likeTuits);
-      } catch (error) {
-        console.error(error);
-      }
-    };
     // fetchProfile();
-
-    fetchMyTuits();
     fetchMyFollowing();
     fetchMyFollowers();
-    fetchMyLikes();
   }, []);
 
   const handleLogout = async () => {
@@ -100,9 +74,6 @@ function UserProfileScreen() {
     }
   };
 
-  const deleteTuitHandler = async (id) => {
-    await dispatch(deleteTuitThunk(id));
-  }
   if (!profile) {
     return (
         <div>
@@ -113,11 +84,10 @@ function UserProfileScreen() {
   }
   const shouldShowColorSelection = myFollowers.length >= 5;
 
-
   const colorChoices = [
-    { name: 'Black', color: 'black' },
-    { name: 'Red', color: 'red' },
-    { name: 'Blue', color: 'blue' },
+    {name: 'Black', color: 'black'},
+    {name: 'Red', color: 'red'},
+    {name: 'Blue', color: 'blue'},
   ];
 
   console.log(profile);
@@ -126,15 +96,17 @@ function UserProfileScreen() {
         <h1>❤User Profile Page❤️</h1>
         {profile && (
             <div>
-              <div style={{ border: '1px solid black', padding: '10px' }}>
+              <div style={{border: '1px solid black', padding: '10px'}}>
                 {myFollowers.length >= 5 ? (
-                    <span style={{ color: 'blue' }}>  This is YounXD's Verified User☑️☑️☑️</span>
+                    <span style={{color: 'blue'}}>  This is YounXD's Verified User☑️☑️☑️</span>
                 ) : (
-                    <span style={{ color: 'red' }}>  This is a normal User!🚩🚩🚩</span>
+                    <span
+                        style={{color: 'red'}}>  This is a normal User!🚩🚩🚩</span>
                 )}
               </div>
               <div>
-                <label style={{ color: profile.color ?? 'black' }}>🌸Username🌸</label>
+                <label
+                    style={{color: profile.color ?? 'black'}}>🌸Username🌸</label>
                 <input
                     className="form-control"
                     type="text"
@@ -145,10 +117,12 @@ function UserProfileScreen() {
               <div>
                 {shouldShowColorSelection && (
                     <div>
-                      <label>🏷️🏷️🏷️Choose Your Username's Color(Only for Verified User!)：</label>
+                      <label>🏷️🏷️🏷️Choose Your Username's Color(Only for
+                        Verified User!)：</label>
                       <select
                           value={selectedColor}
-                          onChange={(event) => setSelectedColor(event.target.value)}
+                          onChange={(event) => setSelectedColor(
+                              event.target.value)}
                       >
                         {colorChoices.map((choice) => (
                             <option key={choice.color} value={choice.color}>
@@ -156,7 +130,8 @@ function UserProfileScreen() {
                             </option>
                         ))}
                       </select>
-                      <button onClick={handleUpdate} className="btn btn-primary mt-2">
+                      <button onClick={handleUpdate}
+                              className="btn btn-primary mt-2">
                         Update Color
                       </button>
                     </div>
@@ -301,7 +276,7 @@ function UserProfileScreen() {
                     <i className="fa-solid fa-user"></i>
                     <span
                         className="fw-bolder">🎈 Followers: </span> {myFollowers.length
-                    ?? ""}
+                      ?? ""}
                   </div>
                 </li>
                 {myFollowers.map((user) => (
@@ -323,7 +298,7 @@ function UserProfileScreen() {
           </div>
         </div>
         <br></br>
- {/*       <ul className="list-group mt-2">
+        {/*       <ul className="list-group mt-2">
           <li className="list-group-item">
             <div>
               <i className="fa-brands fa-square-twitter"></i>
@@ -365,23 +340,6 @@ function UserProfileScreen() {
 
             </div>
           </li>
-          {myLikes.map((tuit) => (
-              <li className="list-group-item">
-                <div className="row">
-                  <div className="col-2">
-                    <img width={70} className="float-end rounded-3"
-                         src={`./images/${tuit.image}`}/>
-                  </div>
-                  <div className="col-10">
-                    <div><span className="fw-bolder">{tuit.username}</span> <i
-                        className="fas fa-check-circle wd-blue"></i> {tuit.username} • {tuit.time}
-                    </div>
-                    <div>{tuit.tuit}</div>
-                  </div>
-                </div>
-              </li>
-          ))}
-
         </ul>
       </div>
   );
