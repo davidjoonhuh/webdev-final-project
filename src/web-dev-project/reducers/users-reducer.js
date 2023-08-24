@@ -5,8 +5,8 @@ const initialState = {
     loading: false
 }
 
-const commentsSlice = createSlice({
-    name: 'comments',
+const usersSlice = createSlice({
+    name: 'users',
     initialState,
     extraReducers: {
         [findUserByIdThunk.fulfilled]:
@@ -27,4 +27,4 @@ const commentsSlice = createSlice({
     }
 })
 
-export default commentsSlice.reducer
+export default usersSlice.reducer
