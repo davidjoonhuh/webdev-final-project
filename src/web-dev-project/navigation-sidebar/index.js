@@ -4,7 +4,6 @@ import { useSelector } from "react-redux";
 const NavigationSidebar = () => {
     const { pathname } = useLocation();
     const { currentUser } = useSelector((state) => state.user);
-    console.log(currentUser);
     const [ignore, youboxd, active] = pathname.split("/");
     const links = ["search", "explore", "notifications", "messages", "bookmarks", "lists", "more"];
 

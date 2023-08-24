@@ -6,7 +6,10 @@ export const updateVideoThunk =
     createAsyncThunk(
         'videos/updateVideo',
         async (video) =>
-            await service.updateVideo(video)
+            {
+                await service.updateVideo(video)
+                return video
+            }
     )
 export const createVideoThunk = createAsyncThunk(
     'videos/createVideo',
@@ -24,5 +27,8 @@ export const deleteVideoThunk = createAsyncThunk(
 
 export const findVideosThunk = createAsyncThunk(
     "videos/findVideos",
-    async () => await service.findVideos()
+    async () => {
+        const videos = await service.findVideos()
+        return videos
+    }
 );

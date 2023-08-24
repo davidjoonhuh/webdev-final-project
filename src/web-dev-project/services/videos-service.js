@@ -18,6 +18,6 @@ export const deleteVideo = async (id) => {
 }
 
 export const updateVideo = async (video) => {
-    const response = await axios.put(`${VIDEOS_API}/${video._id}`, video);
+    const response = await axios.put(`${VIDEOS_API}/${video.vId}`, video);
     return video;
 }

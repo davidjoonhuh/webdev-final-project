@@ -20,27 +20,51 @@ const VideoItem = (
     const navigate = useNavigate();
     const dispatch = useDispatch();
     const { videos, loading } = useSelector(state => state.videos);
+    // const videos = useSelector(state => state.videos)
+
     const { currentUser } = useSelector((state) => state.user);
     //const [profile, setProfile] = useState(currentUser);
+    // useEffect(() => {
+    //     dispatch(findVideosThunk())
+    //     console.log("all videos")
+    //     console.log(videos)
+    // }, [])
 
-    const updateUser = (vId) => {
-        // Create a deep copy of currentUser
-        const user = JSON.parse(JSON.stringify(currentUser));
+    // const [updatedVideosList, setVideosList] = useState(videos);
 
-        // Check if user.liked is an array or not, and initialize it if needed
-        if (!Array.isArray(user.liked)) {
-            user.liked = [];
-        }
+    // async function fetchVideos() {
+    //     const { payload } = await dispatch(findVideosThunk())
+    //     console.log("payload")
+    //     console.log(payload)
+    //     setVideosList(payload);
+    // }
 
-        // Check if vId is in user.liked and either push it or remove it
-        if (user.liked.indexOf(vId) === -1) {
-            user.liked.push(vId);
-        } else {
-            user.liked.splice(user.liked.indexOf(vId), 1);
-        }
-        return user
-    }
+    useEffect(() => {
+        // fetchVideos()
+        console.log("all videos")
+        console.log(videos)
+    }, [])
 
+
+    // const updateUser = (vId) => {
+    //     // Create a deep copy of currentUser
+    //     const user = JSON.parse(JSON.stringify(currentUser));
+
+    //     // Check if user.liked is an array or not, and initialize it if needed
+    //     if (!Array.isArray(user.liked)) {
+    //         user.liked = [];
+    //     }
+
+    //     // Check if vId is in user.liked and either push it or remove it
+    //     if (user.liked.indexOf(vId) === -1) {
+    //         user.liked.push(vId);
+    //     } else {
+    //         user.liked.splice(user.liked.indexOf(vId), 1);
+    //     }
+    //     return user
+    // }
+
+    // Determine if uID is in likes of video
     const uidInVideo = (vId, uId) => {
         const video = videos.find((video) => video.videoId === vId);
 
@@ -50,7 +74,9 @@ const VideoItem = (
             return false;
         }
     }
+
     const createVideoIfNot = (vId) => {
+        console.log("create if not")
         const video = videos.find((video) => video.videoId === vId);
 
         const vidTemp = {
@@ -64,44 +90,70 @@ const VideoItem = (
         }
     }
 
-    const updateVideo = (vId, uId) => {
-        const video = videos.find((video) => video.videoId === vId);
+    // Create object that will toggle like on video
+    const updateVideoLike = async (vId, uId) => {
+        let video = videos.find((video) => video.videoId === vId);
+        console.log("video 1")
+
+        if (video === undefined) {
+            console.log("video is undefined")
+            return
+        } else {
+            console.log("video exists")
+            console.log(video)
+        }
 
         const vid = JSON.parse(JSON.stringify(video));
+        console.log("video")
         console.log(vid)
-        if (!Array.isArray(vid.likes)) {
-            vid.likes = [];
-        }
+
+        // if (!Array.isArray(vid.likes)) {
+        //     vid.likes = [];
+        // }
+
+        // Create new like object here
 
         if (vid.likes.indexOf(uId) === -1) {
-            vid.likes.push(uId)
+            const videoUpdate = {
+                vId : vId,
+                addLike: uId
+            }
+            await dispatch(updateVideoThunk(videoUpdate))
         } else {
-            vid.likes.splice(vid.likes.indexOf(uId), 1)
+            const videoUpdate = {
+                vId : vId,
+                removeLike : uId
+            }
+            await dispatch(updateVideoThunk(videoUpdate))
         }
         console.log(vid)
-        if (!vid) {
-            dispatch(createVideoIfNot(vId))
-        }
+
         return vid
+
     }
 
 
     const toggleVideoLiked = async (obj) => {
-        console.log(obj)
-        const x = uidInVideo(obj.videoId, obj.user._id)
-        console.log(x)
-        const v = updateVideo(obj.videoId, obj.user._id)
-        const user = updateUser(obj.videoId)
-        console.log(v)
-        await dispatch(updateUserThunk(user));
-        await dispatch(updateVideoThunk(v));
+        // console.log(obj)
+        // const x = uidInVideo(obj.videoId, obj.user._id)
+        // console.log(x)
+        await createVideoIfNot(obj.videoId)
+
+        console.log("after create vid if not")
+        console.log(videos)
+        const v = await updateVideoLike(obj.videoId, obj.user._id)
+        // const user = updateUser(obj.videoId)
+        // console.log(v)
+        // await dispatch(updateUserThunk(user));
+        // await dispatch(updateVideoThunk(v));
     }
+
+    // Don't need to look at this
     const handleVideoSelect = async (id) => {
         navigate("/youboxd/details?identifier=" + id);
     }
-    useEffect(() => {
-        // dispatch(createVideoIfNot(vid.id.videoId))
-    }, [])
+
+
     return (
         <li className="list-group-item">
             <div className="row">
