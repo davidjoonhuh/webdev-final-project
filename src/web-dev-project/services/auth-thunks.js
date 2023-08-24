@@ -8,35 +8,32 @@ export const loginThunk = createAsyncThunk(
         return user;
     }
 );
+
 export const profileThunk = createAsyncThunk(
     "auth/profile", async () => {
-        const user = authService.profile();
-        return user;
+        //const response = authService.profile();
+       // return response.data;
+       return await authService.profile();
+
     });
+
 export const logoutThunk = createAsyncThunk(
     "auth/logout", async () => {
         return await authService.logout();
     });
+
 export const updateUserThunk = createAsyncThunk(
     "user/updateUser", async (user) => {
+        console.log("updateuserthunk:")
+        console.log(user)
         await authService.updateUser(user);
+        console.log("returned user")
+        console.log(user)
         return user;
     });
+
 export const registerThunk = createAsyncThunk(
-    "user/register", async (credentials) => {
-        const user = await authService.register(credentials);
+    "user/register", async (cred) => {
+        const user = await authService.register(cred);
         return user;
-    });
-
-export const updateUserByIdThunk = createAsyncThunk(
-    "user/updateUserById", async ({user, uid}) => {
-      await authService.updateUserById({user, uid});
-      return user;
-    }
-);
-
-export const deleteUserThunk = createAsyncThunk(
-    "user/deleteUser", async (user) => {
-      await authService.deleteUser(user);
-      return user;
     });

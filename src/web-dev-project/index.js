@@ -19,11 +19,11 @@ import PublicProfileScreen from "./profile-screen/public-profile-screen";
 
 const store = configureStore({
     reducer: { 
-        whoToFollowList: whoReducer,
-        vids: youtubeReducer,
-        user: authReducer,
-        comments: commentsReducer,
-        users: usersReducer
+        whoToFollowList: whoReducer, // needs rebuild
+        vids: youtubeReducer, // updated in separate branch
+        user: authReducer, // what's currently being updated by profile, needs reworking
+        comments: commentsReducer, // for comments
+        users: usersReducer // separate build, will transfer over/ needs reworking
     }
 });
 function Youboxd() {
@@ -48,7 +48,7 @@ function Youboxd() {
                     </div>
                    <div
                     className="d-none d-lg-block col-lg-4 col-xl-3">
-                    <WhoToFollowList /></ div>
+                    </ div>
                 </div>
             </div>
         </Provider>
