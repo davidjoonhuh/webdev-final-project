@@ -40,7 +40,7 @@ const NavigationSidebar = () => {
   const {pathname} = useLocation();
   const active = pathname.replace("/youboxd/", "");
   const {currentUser} = useSelector((state) => state.user);
-  const [ignore, youboxd, active] = pathname.split("/");
+  // const [ignore, youboxd, active] = pathname.split("/");
   console.log(currentUser);
 
   return (
