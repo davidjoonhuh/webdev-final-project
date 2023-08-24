@@ -3,9 +3,10 @@ import { useSelector, useDispatch } from "react-redux";
 import { useNavigate } from "react-router";
 import { profileThunk, logoutThunk, updateUserThunk }
     from "../services/auth-thunks";
+import FriendsList from "./friends-list";
+
 function ProfileScreen() {
     const { currentUser } = useSelector((state) => state.user);
-    // console.log(currentUser);
     const [profile, setProfile] = useState(currentUser);
     const dispatch = useDispatch();
     const navigate = useNavigate();
@@ -47,6 +48,9 @@ function ProfileScreen() {
                         }} />
                 </div></div>
             )}
+
+            <FriendsList user={profile}/>
+
             <button
                 onClick={() => {
                     dispatch(logoutThunk());

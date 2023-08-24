@@ -8,4 +8,12 @@ export const findUserByIdThunk = createAsyncThunk(
         return user;
     })
 
+export const updateUserSinCurrentThunk = createAsyncThunk(
+    "users/updateUserSinCurrent",
+    async (id) => {
+        const user = await service.updateUserSinCurrent(id)
+        return user;
+    })
+
+
 

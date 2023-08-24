@@ -1,7 +1,7 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { findUserByIdThunk } from "../services/users-thunks";
+import { findUserByIdThunk, updateUserSinCurrentThunk } from "../services/users-thunks";
 const initialState = {
-    user: null,
+    userInfo: null,
     loading: false
 }
 
@@ -12,18 +12,24 @@ const usersSlice = createSlice({
         [findUserByIdThunk.fulfilled]:
             (state, { payload }) => {
                 state.loading = false;
-                state.user = payload;
+                console.log("usersSlice")
+                console.log(payload)
+                state.userInfo = payload;
             },
         [findUserByIdThunk.pending]:
             (state, { payload }) => {
                 state.loading = true;
-                state.payload = null;
+                state.userInfo = null;
             },
         [findUserByIdThunk.rejected]:
             (state, action) => {
                 state.loading = false;
-                state.comments = action.error;
-            }
+                state.userInfo = action.error;
+            },
+        [updateUserSinCurrentThunk.fulfilled]:
+            (state, { payload }) => {
+                state.loading = false;
+            },
     }
 })
 
