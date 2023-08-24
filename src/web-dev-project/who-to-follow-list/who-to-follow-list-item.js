@@ -6,9 +6,6 @@ import {Link} from "react-router-dom";
 
 const WhoToFollowListItem = ({whoToFollow}) => {
   const { currentUser} = useSelector((state) => state.user);
-  // const [profile, setProfile] = useState(currentUser);
-  // const [followed, setFollowed] = useState(false);
-
   let isFollowed = false;
   let myProfile = currentUser;
   if (currentUser && currentUser.following && currentUser.following.includes(whoToFollow._id)) {
@@ -16,11 +13,10 @@ const WhoToFollowListItem = ({whoToFollow}) => {
   }
   const dispatch = useDispatch();
 
-
   const addToFollowers = (userId, profileToEdit) => {
     let newFollowers;
-    if (typeof profileToEdit.follwers === 'undefined') {
-      console.error("profileToEdit.follwers is undefined")
+    if (typeof profileToEdit.followers === 'undefined') {
+      console.error("profileToEdit.followers is undefined")
       newFollowers = [userId]
     } else {
       newFollowers = [...profileToEdit.followers, userId]
@@ -30,8 +26,8 @@ const WhoToFollowListItem = ({whoToFollow}) => {
 
   const removeFollowers = (userId, profileToEdit) => {
     let newFollowers;
-    if (typeof profileToEdit.follwers === 'undefined') {
-      console.error("profileToEdit.follwers is undefined")
+    if (typeof profileToEdit.followers === 'undefined') {
+      console.error("profileToEdit.followers is undefined")
       newFollowers = []
     } else {
       newFollowers = profileToEdit.followers.filter(item => item !== userId);
@@ -86,6 +82,8 @@ const WhoToFollowListItem = ({whoToFollow}) => {
 
   const handleUnFollow = async () => {
     const newProfile = removeFollowing(whoToFollow._id, myProfile)
+    // setProfile(newProfile);
+    // setFollowed(false);
     myProfile = newProfile;
     isFollowed = false;
     try {
@@ -111,7 +109,7 @@ const WhoToFollowListItem = ({whoToFollow}) => {
       <li className="list-group-item">
         <div className="row">
           <div className="col-9">
-            <Link className="nav-link" to={"/youboxd/profile/"+whoToFollow._id}
+            <Link className="nav-link" to={"/tuiter/profile/"+whoToFollow._id}
                   style={{ textDecoration: 'underline'}}>
               <i className="fa-solid fa-heart"></i>   {whoToFollow.firstName} {whoToFollow.lastName}</Link>
 
@@ -124,7 +122,7 @@ const WhoToFollowListItem = ({whoToFollow}) => {
           }
           {isFollowed && <div className="col-3">
             <button onClick={handleUnFollow}
-                    className="btn btn-primary rounded-pill float-end">unFollow
+                    className="btn btn-primary rounded-pill float-end">UNFollow
             </button>
           </div>
           }
