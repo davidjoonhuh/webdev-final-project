@@ -80,7 +80,7 @@ function RegisterScreen() {
 
 
         <div className="mt-2">
-          <label>Choose Your Role.</label>
+          <label>Choose Your Role:</label>
           <select
               value={role}
               onChange={(event) => setRole(event.target.value)}
