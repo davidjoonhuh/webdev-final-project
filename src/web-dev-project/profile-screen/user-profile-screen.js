@@ -2,26 +2,40 @@ import React, { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { useNavigate } from "react-router";
 import { profileThunk, logoutThunk, updateUserThunk } from "../services/auth-thunks";
+import { deleteTuitThunk } from "../services/tuits-thunks";
+import * as tuitsService from "../services/tuits-service";
 import * as whoService from "../services/who-service";
 import {Link} from "react-router-dom";
 
 function UserProfileScreen() {
   const {currentUser} = useSelector((state) => state.user);
-  const [profile, setProfile] = useState(currentUser);
   const [selectedColor, setSelectedColor] = useState([]);
+  const [profile, setProfile] = useState(currentUser);
+  const [myTuits, setMyTuits] = useState([]);
   const [myFollowing, setMyFollowing] = useState([]);
   const [myFollowers, setMyFollowers] = useState([]);
   const [myLikes, setMyLikes] = useState([]);
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
-    const loadProfile = async () => {
+
+  const loadProfile = async () => {
     const action = await dispatch(profileThunk());
 
     setProfile(action.payload);
   };
-  
+
   useEffect(() => {
+
+    loadProfile();
+    const fetchMyTuits = async () => {
+      try {
+        const tuits = await tuitsService.findMyTuits();
+        setMyTuits(tuits);
+      } catch (error) {
+        console.error(error);
+      }
+    };
     const fetchMyFollowing = async () => {
       try {
         let followingIds = !profile.following ? [] : profile.following;
@@ -61,7 +75,9 @@ function UserProfileScreen() {
         console.error(error);
       }
     };
-    loadProfile();
+    // fetchProfile();
+
+    fetchMyTuits();
     fetchMyFollowing();
     fetchMyFollowers();
     fetchMyLikes();
@@ -69,10 +85,9 @@ function UserProfileScreen() {
 
   const handleLogout = async () => {
     await dispatch(logoutThunk());
-    navigate("/youboxd/login");
+    navigate("../login");
   };
-
-   const handleUpdate = async () => {
+  const handleUpdate = async () => {
     try {
       const updatedProfile = {
         ...profile,
@@ -84,6 +99,10 @@ function UserProfileScreen() {
       console.error(error);
     }
   };
+
+  const deleteTuitHandler = async (id) => {
+    await dispatch(deleteTuitThunk(id));
+  }
   if (!profile) {
     return (
         <div>
@@ -92,27 +111,29 @@ function UserProfileScreen() {
         </div>
     );
   }
-
   const shouldShowColorSelection = myFollowers.length >= 5;
+
+
   const colorChoices = [
     { name: 'Black', color: 'black' },
     { name: 'Red', color: 'red' },
     { name: 'Blue', color: 'blue' },
   ];
-  
+
+  console.log(profile);
   return (
       <div>
         <h1>❤User Profile Page❤️</h1>
         {profile && (
             <div>
-          <div style={{ border: '1px solid black', padding: '10px' }}>
+              <div style={{ border: '1px solid black', padding: '10px' }}>
                 {myFollowers.length >= 5 ? (
-                    <span style={{ color: 'blue' }}>  This is Youboxd's Verified User☑️☑️☑️</span>
+                    <span style={{ color: 'blue' }}>  This is YounXD's Verified User☑️☑️☑️</span>
                 ) : (
                     <span style={{ color: 'red' }}>  This is a normal User!🚩🚩🚩</span>
                 )}
               </div>
-                <div>
+              <div>
                 <label style={{ color: profile.color ?? 'black' }}>🌸Username🌸</label>
                 <input
                     className="form-control"
@@ -121,7 +142,7 @@ function UserProfileScreen() {
                 />
               </div>
 
-                    <div>
+              <div>
                 {shouldShowColorSelection && (
                     <div>
                       <label>🏷️🏷️🏷️Choose Your Username's Color(Only for Verified User!)：</label>
@@ -232,10 +253,12 @@ function UserProfileScreen() {
                     }}
                 />
               </div>
+
               <button onClick={handleUpdate}
                       className="btn btn-primary mt-2 mr-4">
                 Update
               </button>
+
               <button className="btn btn-primary mt-2 btn-danger"
                       onClick={handleLogout}>
                 Logout
@@ -250,17 +273,19 @@ function UserProfileScreen() {
                   <div>
                     <i className="fa-solid fa-user"></i>
                     <span
-                        className="fw-bolder">💓 Following: </span>
+                        className="fw-bolder">💓 Following: </span> {myFollowing.length
+                      ?? ""}
                   </div>
                 </li>
 
                 {myFollowing.map((user) => (
                     <li className="list-group-item" key={user._id}>
                       <Link className="nav-link"
-                            to={"/tuiter/profile/" + user._id}
+                            to={"/youboxd/profile/" + user._id}
                             style={{
                               textDecoration: 'underline',
-                              color: 'blue'
+                              color: 'black',
+                              borderBottomColor: 'blue'
                             }}>
                         <i className="fa-solid fa-arrow-right"></i> {user.firstName} {user.lastName}
                       </Link>
@@ -275,16 +300,18 @@ function UserProfileScreen() {
                   <div>
                     <i className="fa-solid fa-user"></i>
                     <span
-                        className="fw-bolder">🎈 Followers: </span>
+                        className="fw-bolder">🎈 Followers: </span> {myFollowers.length
+                    ?? ""}
                   </div>
                 </li>
                 {myFollowers.map((user) => (
                     <li className="list-group-item" key={user._id}>
                       <Link className="nav-link"
-                            to={"/tuiter/profile/" + user._id}
+                            to={"/youboxd/profile/" + user._id}
                             style={{
                               textDecoration: 'underline',
-                              color: 'blue'
+                              color: 'black',
+                              borderBottomColor: 'blue'
                             }}>
                         <i className="fa-solid fa-arrow-right"></i>
                         {user.firstName} {user.lastName}
@@ -296,6 +323,28 @@ function UserProfileScreen() {
           </div>
         </div>
         <br></br>
+ {/*       <ul className="list-group mt-2">
+          <li className="list-group-item">
+            <div>
+              <i className="fa-brands fa-square-twitter"></i>
+              <span className="fw-bolder"> My Comments: </span>
+            </div>
+          </li>
+          {comments.map((comment) => (
+              <li className="list-group-item">
+                <div className="row">
+                  <div className="col-10">
+                    <i className="bi bi-x-lg float-end btn btn-danger rounded-pill float-end mt-2 ps-2 pe-2 fw-bold"
+                       onClick={() => deleteTuitHandler(comment._id)}>Delete</i>
+                    <div><span className="fw-bolder">{comment.username}</span> <i
+                        className="fas fa-check-circle wd-blue"></i> @{comment.username}
+                    </div>
+                    <div>{comments.text}</div>
+                  </div>
+                </div>
+              </li>
+          ))}
+        </ul>*/}
         <ul className="list-group mt-2">
           <li className="list-group-item">
             <div>
