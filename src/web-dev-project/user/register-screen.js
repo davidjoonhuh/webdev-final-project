@@ -10,7 +10,7 @@ function RegisterScreen() {
   const [email, setEmail] = useState("");
   const [phone, setPhone] = useState("");
   const [address, setAddress] = useState("");
-  const [role, setRole] = useState("");
+  const [role, setRole] = useState("Viewer");
 
   const navigate = useNavigate();
   const dispatch = useDispatch();
@@ -89,6 +89,7 @@ function RegisterScreen() {
             <option value="Administrator">Administrator</option>
             <option value="User">User</option>
           </select>
+
         </div>
         <button className="btn btn-primary mt-2" onClick={handleRegister}>
           Register
