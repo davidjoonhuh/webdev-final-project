@@ -45,6 +45,7 @@ function Youboxd() {
                             <Route path="/register" element={<RegisterScreen />} />
                             <Route path="/profile" element={<UserProfileScreen/>}/>
                             <Route path="/profile/:profileId" element={<PublicProfileScreen/>} />
+                            <Route path="/admin" element={<AdminScreen/>}/>
                         </Routes>
                     </div>
                    <div

@@ -110,7 +110,7 @@ function UserProfileScreen() {
     );
   }
   const shouldShowColorSelection = myFollowers.length >= 5;
-
+  const isAdmin = profile.role === "Administrator";
   const colorChoices = [
     { name: "Black", color: "black" },
     { name: "Red", color: "red" },
@@ -120,25 +120,25 @@ function UserProfileScreen() {
   console.log(profile);
   return (
     <div>
-      <h1>❤User Profile Page❤️</h1>
+      <h1>User Profile Page</h1>
       {profile && (
         <div>
           <div style={{ border: "1px solid black", padding: "10px" }}>
-            {myFollowers.length >= 5 ? (
-              <span style={{ color: "blue" }}>
-                {" "}
-                This is YounXD's Verified User☑️☑️☑️
-              </span>
-            ) : (
-              <span style={{ color: "red" }}>
-                {" "}
-                This is a normal User!🚩🚩🚩
-              </span>
-            )}
-          </div>
+                {isAdmin ? (
+                    <span style={{ color: "green" }}>This is an Administrator</span>
+                ) : (
+                    <>
+                      {myFollowers.length >= 5 ? (
+                          <span style={{ color: "blue" }}>This is YounXD's Verified User☑️</span>
+                      ) : (
+                          <span style={{ color: "red" }}>This is a normal User</span>
+                      )}
+                    </>
+                )}
+              </div>
           <div>
             <label style={{ color: profile.color ?? "black" }}>
-              🌸Username🌸
+              Username
             </label>
             <input
               className="form-control"
@@ -155,33 +155,34 @@ function UserProfileScreen() {
           </div>
 
           <div>
-            {shouldShowColorSelection && (
-              <div>
-                <label>
-                  🏷️🏷️🏷️Choose Your Username's Color(Only for Verified User!)：
-                </label>
-                <select
-                  value={selectedColor}
-                  onChange={(event) => setSelectedColor(event.target.value)}
-                >
-                  {colorChoices.map((choice) => (
-                    <option key={choice.color} value={choice.color}>
-                      {choice.name}
-                    </option>
-                  ))}
-                </select>
-                <button onClick={handleUpdate} className="btn btn-primary mt-2">
-                  Update Color
-                </button>
+                {shouldShowColorSelection && (
+                    <div>
+                      <label>Choose Your Username's Color(Only for
+                        Verified User!)：</label>
+                      <select
+                          value={selectedColor}
+                          onChange={(event) => setSelectedColor(
+                              event.target.value)}
+                      >
+                        {colorChoices.map((choice) => (
+                            <option key={choice.color} value={choice.color}>
+                              {choice.name}
+                            </option>
+                        ))}
+                      </select>
+                      <button onClick={handleUpdate}
+                              className="btn btn-primary mt-2">
+                        Update Color
+                      </button>
+                    </div>
+                )}
               </div>
-            )}
-          </div>
           <br />
           <div>
             <div className="row">
               <div className="col">
                 <div className="mb-3">
-                  <label className="form-label">🌷First Name</label>
+                  <label className="form-label">First Name</label>
                   <input
                     className="form-control"
                     type="text"
@@ -198,7 +199,7 @@ function UserProfileScreen() {
               </div>
               <div className="col">
                 <div className="mb-3">
-                  <label className="form-label">🌷Last Name</label>
+                  <label className="form-label">Last Name</label>
                   <input
                     className="form-control"
                     type="text"
@@ -218,7 +219,7 @@ function UserProfileScreen() {
           <div className="row">
             <div className="col">
               <div>
-                <label>🎀Email</label>
+                <label>Email</label>
                 <input
                   className="form-control"
                   type="text"
@@ -235,7 +236,7 @@ function UserProfileScreen() {
             </div>
             <div className="col">
               <div>
-                <label>🐇Phone Number</label>
+                <label>Phone Number</label>
                 <input
                   className="form-control"
                   type="text"
@@ -253,7 +254,7 @@ function UserProfileScreen() {
           </div>
 
           <div>
-            <label>💒Address</label>
+            <label>Address</label>
             <input
               className="form-control"
               type="text"
@@ -287,7 +288,7 @@ function UserProfileScreen() {
               <li className="list-group-item">
                 <div>
                   <i className="fa-solid fa-user"></i>
-                  <span className="fw-bolder">💓 Following: </span>{" "}
+                  <span className="fw-bolder">Following: </span>{" "}
                   {myFollowing.length ?? ""}
                 </div>
               </li>
@@ -315,7 +316,7 @@ function UserProfileScreen() {
               <li className="list-group-item">
                 <div>
                   <i className="fa-solid fa-user"></i>
-                  <span className="fw-bolder">🎈 Followers: </span>{" "}
+                  <span className="fw-bolder"> Followers: </span>{" "}
                   {myFollowers.length ?? ""}
                 </div>
               </li>
@@ -340,33 +341,11 @@ function UserProfileScreen() {
         </div>
       </div>
       <br></br>
-      {/*       <ul className="list-group mt-2">
-          <li className="list-group-item">
-            <div>
-              <i className="fa-brands fa-square-twitter"></i>
-              <span className="fw-bolder"> My Comments: </span>
-            </div>
-          </li>
-          {comments.map((comment) => (
-              <li className="list-group-item">
-                <div className="row">
-                  <div className="col-10">
-                    <i className="bi bi-x-lg float-end btn btn-danger rounded-pill float-end mt-2 ps-2 pe-2 fw-bold"
-                       onClick={() => deleteTuitHandler(comment._id)}>Delete</i>
-                    <div><span className="fw-bolder">{comment.username}</span> <i
-                        className="fas fa-check-circle wd-blue"></i> @{comment.username}
-                    </div>
-                    <div>{comments.text}</div>
-                  </div>
-                </div>
-              </li>
-          ))}
-        </ul>*/}
       <ul className="list-group mt-2">
         <li className="list-group-item">
           <div>
             <i className="fa-solid fa-heart"></i>
-            <span className="fw-bolder"> 💕 My Likes: </span>
+            <span className="fw-bolder">  My Likes: </span>
           </div>
           <div>
             <iframe

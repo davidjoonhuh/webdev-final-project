@@ -71,23 +71,28 @@ function PublicProfileScreen() {
       console.error(error);
     }
   };
-
+  const isAdmin = profile.role === "Administrator";
   return (
       <div>
-        <h1>❤Welcome to My Profile Screen❤</h1>
+        <h1>Welcome to My Profile Screen</h1>
         {profile && (
             <div>
-              <div style={{border: '1px solid black', padding: '10px'}}>
-                {myFollowers.length >= 5 ? (
-                    <span style={{color: 'blue'}}>  This is YounXD's Verified User☑️☑️☑️</span>
+              <div style={{ border: "1px solid black", padding: "10px" }}>
+                {isAdmin ? (
+                    <span style={{ color: "green" }}>This is an Administrator</span>
                 ) : (
-                    <span
-                        style={{color: 'red'}}>  This is a normal User!🚩🚩🚩</span>
+                    <>
+                      {myFollowers.length >= 5 ? (
+                          <span style={{ color: "blue" }}>This is YounXD's Verified User☑️</span>
+                      ) : (
+                          <span style={{ color: "red" }}>This is a normal User</span>
+                      )}
+                    </>
                 )}
               </div>
 
               <div>
-                <label>🌸Username🌸</label>
+                <label>Username</label>
                 <input
                     className="form-control"
                     type="text"
@@ -95,7 +100,7 @@ function PublicProfileScreen() {
                 />
               </div>
               <div>
-                <label>🌷First Name🌷</label>
+                <label>First Name</label>
                 <input
                     className="form-control"
                     type="text"
@@ -110,7 +115,7 @@ function PublicProfileScreen() {
                 />
               </div>
               <div>
-                <label>🌷Last Name🌷</label>
+                <label>Last Name</label>
                 <input
                     className="form-control"
                     type="text"
@@ -168,7 +173,7 @@ function PublicProfileScreen() {
                   <div>
                     <i className="fa-solid fa-user"></i>
                     <span
-                        className="fw-bolder">💓 Following: </span> {myFollowing.length
+                        className="fw-bolder">Following: </span> {myFollowing.length
                       ?? ""}
                   </div>
                 </li>
@@ -195,7 +200,7 @@ function PublicProfileScreen() {
                   <div>
                     <i className="fa-solid fa-user"></i>
                     <span
-                        className="fw-bolder">🎈 Followers: </span> {myFollowers.length
+                        className="fw-bolder"> Followers: </span> {myFollowers.length
                       ?? ""}
                   </div>
                 </li>
@@ -218,26 +223,6 @@ function PublicProfileScreen() {
             </div>
           </div>
         </div>
-        {/*       <ul className="list-group mt-2">
-          <li className="list-group-item">
-            <div>
-              <i className="fa-brands fa-square-twitter"></i>
-              <span className="fw-bolder"> My Comments: </span>
-            </div>
-          </li>
-          {comments.map((comment) => (
-              <li className="list-group-item">
-                <div className="row">
-                  <div className="col-10">
-                    <div><span className="fw-bolder">{comment.username}</span> <i
-                        className="fas fa-check-circle wd-blue"></i> @{comment.username}
-                    </div>
-                    <div>{comments.text}</div>
-                  </div>
-                </div>
-              </li>
-          ))}
-        </ul>*/}
       </div>
   );
 }
