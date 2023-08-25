@@ -17,6 +17,7 @@ import WhoToFollowList from "./who-to-follow-list";
 import whoReducer from "./reducers/who-reducer";
 import UserProfileScreen from "./profile-screen/user-profile-screen";
 import PublicProfileScreen from "./profile-screen/public-profile-screen";
+import AdminScreen from "./profile-screen/admin-screen";
 
 const store = configureStore({
     reducer: { 
