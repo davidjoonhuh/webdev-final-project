@@ -2,7 +2,7 @@ import axios from 'axios';
 const SERVER_API_URL = process.env.REACT_APP_SERVER_API_URL;
 
 // Construct the base API URL
-const API_BASE_URL = `${SERVER_API_URL}/api`;
+const API_BASE_URL = `${SERVER_API_URL}`;
 
 // Endpoint paths
 const LOGIN_API = `${API_BASE_URL}/users/login`;

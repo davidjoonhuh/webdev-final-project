@@ -5,17 +5,33 @@ import { useState } from "react";
 import { Link } from "react-router-dom";
 
 const CommentsListItem = ({ comment }) => {
-    const [commentUsername, setCommentUsername] = useState(users);
+
+    // const dispatch = useDispatch();
+    // const { users, loading } = useSelector((state) => state.users);  // Updated to handle users as an object
+    // const [commentUsername, setCommentUsername] = useState(users);
+
+    // useEffect(() => {
+    //     if (!users[comment.authorId]) {
+    //         dispatch(findUserByIdThunk(comment.authorId));
+    //     } else {
+    //         setCommentUsername(users[comment.authorId].username);
+    //     }
+    // }, [comment.authorId, users, dispatch]);
+
+    const { user, loading } = useSelector((state) => state.user)
+    const [commentUsername, setCommentUsername] = useState(user);
     const dispatch = useDispatch();
-    const { users, loading } = useSelector((state) => state.users);  // Updated to handle users as an object
 
     useEffect(() => {
-        if (!users[comment.authorId]) {
-            dispatch(findUserByIdThunk(comment.authorId));
-        } else {
-            setCommentUsername(users[comment.authorId].username);
+        async function fetchUserId() {
+            const { payload } = await dispatch(findUserByIdThunk(comment.authorId))
+            console.log("asdfasdfas")
+            console.log(payload.username)
+            setCommentUsername(payload.username)
         }
-    }, [comment.authorId, users, dispatch]);
+        fetchUserId()
+    }, [])
+
 
     function formatTimestamp(timestamp) {
         const options = {

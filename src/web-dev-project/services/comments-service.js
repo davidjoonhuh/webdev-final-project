@@ -1,7 +1,7 @@
 import axios from "axios";
 
 const SERVER_API_URL = process.env.REACT_APP_SERVER_API_URL;
-const API_BASE_URL = `${SERVER_API_URL}/api`;  // Updated base API URL
+const API_BASE_URL = `${SERVER_API_URL}`;  // Updated base API URL
 
 const COMMENTS_URL = `${API_BASE_URL}/comments`;
 const AUTHOR_COMMENTS = `${API_BASE_URL}/authorcomments`;
