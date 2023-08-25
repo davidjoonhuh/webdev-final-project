@@ -7,7 +7,6 @@ import youtubeReducer from "./reducers/youtube-reducer";
 import SearchPage from "./search";
 import DetailsPage from "./details";
 import HomeScreen from "./user/home-screen";
-import ProfileScreen from "./user/profile-screen";
 import LoginScreen from "./user/login-screen";
 import RegisterScreen from "./user/register-screen";
 import authReducer from "./reducers/auth-reducer";
