@@ -9,10 +9,17 @@ export const loginThunk = createAsyncThunk(
 );
 
 export const profileThunk = createAsyncThunk(
-    "user/profile", async () => {
+  "user/profile", 
+  async (arg, { rejectWithValue }) => {
+    try {
       const currentUser = await authService.profile();
+      // Transform data here if needed
       return currentUser;
+    } catch (error) {
+      // Handle error
+      return rejectWithValue(error.message);
     }
+  }
 );
 
 
