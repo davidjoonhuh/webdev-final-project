@@ -5,7 +5,8 @@ import {
 
 const initialState = {
   whoToFollowList: [],
-  loading: false
+  loading: false,
+  error: null
 }
 
 const whoToFollowListSlice = createSlice({
@@ -15,7 +16,8 @@ const whoToFollowListSlice = createSlice({
     [findWhoToFollowListThunk.pending]:
         (state) => {
           state.loading = true
-          state.whoToFollowList = []
+          state.whoToFollowList = [];
+          state.error = null;
         },
     [findWhoToFollowListThunk.fulfilled]:
         (state, {payload}) => {
@@ -25,7 +27,7 @@ const whoToFollowListSlice = createSlice({
     [findWhoToFollowListThunk.rejected]:
         (state, action) => {
           state.loading = false
-          state.whoToFollowList = action.error
+          state.error = action.error
         }
   },
   reducers: {}

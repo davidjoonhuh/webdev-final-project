@@ -16,16 +16,8 @@ import WhoToFollowList from "./who-to-follow-list";
 import whoReducer from "./reducers/who-reducer";
 import UserProfileScreen from "./profile-screen/user-profile-screen";
 import PublicProfileScreen from "./profile-screen/public-profile-screen";
+import store from "./store"
 
-const store = configureStore({
-    reducer: {
-        whoToFollowList: whoReducer,
-        vids: youtubeReducer,
-        user: authReducer,
-        comments: commentsReducer,
-        users: usersReducer
-    }
-});
 function Youboxd() {
     return (
         <Provider store={store}>
@@ -44,6 +36,8 @@ function Youboxd() {
                             <Route path="/register" element={<RegisterScreen />} />
                             <Route path="/profile" element={<UserProfileScreen />} />
                             <Route path="/profile/:profileId" element={<PublicProfileScreen />} />
+                            <Route path="/admin" element={<AdminScreen/>}/>
+
                         </Routes>
                     </div>
                     <div
@@ -67,6 +61,7 @@ function Youboxd() {
                             <Route path="/register" element={<RegisterScreen />} />
                             <Route path="/profile" element={<UserProfileScreen />} />
                             <Route path="/profile/:profileId" element={<PublicProfileScreen />} />
+                            <Route path="/admin" element={<AdminScreen/>}/>
                         </Routes>
                     </div>
                     <div
@@ -90,6 +85,7 @@ function Youboxd() {
                             <Route path="/register" element={<RegisterScreen />} />
                             <Route path="/profile" element={<UserProfileScreen />} />
                             <Route path="/profile/:profileId" element={<PublicProfileScreen />} />
+                            <Route path="/admin" element={<AdminScreen/>}/>
                         </Routes>
                     </div>
                     <div
@@ -113,6 +109,7 @@ function Youboxd() {
                             <Route path="/register" element={<RegisterScreen />} />
                             <Route path="/profile" element={<UserProfileScreen />} />
                             <Route path="/profile/:profileId" element={<PublicProfileScreen />} />
+                            <Route path="/admin" element={<AdminScreen/>}/>
                         </Routes>
                     </div>
                 </div>
@@ -132,6 +129,7 @@ function Youboxd() {
                             <Route path="/register" element={<RegisterScreen />} />
                             <Route path="/profile" element={<UserProfileScreen />} />
                             <Route path="/profile/:profileId" element={<PublicProfileScreen />} />
+                            <Route path="/admin" element={<AdminScreen/>}/>
                         </Routes>
                     </div>
                 </div>
