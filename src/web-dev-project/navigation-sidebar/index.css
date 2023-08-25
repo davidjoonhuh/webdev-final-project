@@ -1,0 +1,44 @@
+.wd-container {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  padding: 10px;
+}
+
+
+
+.wd-tab-list {
+  list-style-type: none;
+  display: flex;
+  margin: 0;
+  padding: 0;
+}
+
+.wd-tab-item {
+  margin-right: 100px;
+}
+
+
+.wd-rounded-corners-percentage {
+  border-radius: 15%;
+}
+
+.wd-font-bold {
+  font-weight: bold;
+}
+
+
+.wd-fill-width {
+  flex: 1;
+}
+
+.wd-margin-top-left-right {
+  margin-right: 5%;
+  margin-left: 5%;
+  margin-top: 5%;
+}
+
+
+.wd-padding-left-side {
+  padding-left: 10px;
+}

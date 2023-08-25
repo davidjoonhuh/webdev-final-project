@@ -9,7 +9,7 @@ const HomeScreen = () => {
         <h4>🏠Home🏠</h4>
         <h4>🎉Welcome to our website🎉</h4>
         <div className="team-members">
-          <h2>📋Yonbox team members:</h2>
+          <h2>📋Youboxd Team Members:</h2>
           <ul>
             <li>Jinhyun Hwang</li>
             <li>David Huh</li>

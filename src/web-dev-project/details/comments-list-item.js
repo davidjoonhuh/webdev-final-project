@@ -5,17 +5,17 @@ import { useState } from "react";
 import { Link } from "react-router-dom";
 
 const CommentsListItem = ({ comment }) => {
-    const { user, loading } = useSelector((state) => state.user)
-    const [commentUsername, setCommentUsername] = useState(user);
+    const [commentUsername, setCommentUsername] = useState(users);
     const dispatch = useDispatch();
+    const { users, loading } = useSelector((state) => state.users);  // Updated to handle users as an object
 
     useEffect(() => {
-        async function fetchUserId() {
-            const { payload } = await dispatch(findUserByIdThunk(comment.authorId))
-            setCommentUsername(payload.username)
+        if (!users[comment.authorId]) {
+            dispatch(findUserByIdThunk(comment.authorId));
+        } else {
+            setCommentUsername(users[comment.authorId].username);
         }
-        fetchUserId()
-    }, [])
+    }, [comment.authorId, users, dispatch]);
 
     function formatTimestamp(timestamp) {
         const options = {

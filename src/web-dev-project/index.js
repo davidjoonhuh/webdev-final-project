@@ -31,7 +31,6 @@ function Youboxd() {
                             <Route path="/details" element={<DetailsPage/>} />
                             <Route path="/login" element={<LoginScreen />} />
                             <Route path="/register" element={<RegisterScreen />} />
-                            // <Route path="/profile" element={<ProfileScreen />} />
                             <Route path="/profile" element={<UserProfileScreen/>}/>
                             <Route path="/profile" element={isAdmin ? <AdminProfileScreen /> : <UserProfileScreen />} />
                             <Route path="/profile/:profileId" element={<PublicProfileScreen/>} />

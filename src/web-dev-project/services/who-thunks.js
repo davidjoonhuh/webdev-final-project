@@ -4,12 +4,15 @@ import * as service from "./who-service";
 export const findWhoToFollowListThunk = createAsyncThunk(
     "whoToFollowList/allUsers",
     async () => {
-      const allUsers = await service.findAllUsers()
-      return allUsers
+      const allUsers = await service.findAllUsers();
+      return allUsers;
     }
 );
 
-export const findUserById = createAsyncThunk(
+export const findUserByIdThunk = createAsyncThunk(
     "whoToFollowList/findUser",
-    async () => await service.findUserById()
+    async (uid) => {
+      const user = await service.findUserById(uid);  // Pass the user ID here
+      return user;
+    }
 );

@@ -1,32 +1,45 @@
-import { createAsyncThunk } from "@reduxjs/toolkit";
+import {createAsyncThunk} from "@reduxjs/toolkit";
 import * as authService from "./auth-service";
-
 
 export const loginThunk = createAsyncThunk(
     "user/login", async (credentials) => {
-        const user = await authService.login(credentials);
-        return user;
+      const user = await authService.login(credentials);
+      return user;
     }
 );
+
 export const profileThunk = createAsyncThunk(
-    "auth/profile", async () => {
-        const user = authService.profile();
-        return user;
-    });
+  "user/profile", 
+  async (arg, { rejectWithValue }) => {
+    try {
+      const currentUser = await authService.profile();
+      // Transform data here if needed
+      return currentUser;
+    } catch (error) {
+      // Handle error
+      return rejectWithValue(error.message);
+    }
+  }
+);
+
+
 export const logoutThunk = createAsyncThunk(
     "auth/logout", async () => {
-        return await authService.logout();
+      return await authService.logout();
     });
+
 export const updateUserThunk = createAsyncThunk(
     "user/updateUser", async (user) => {
-        await authService.updateUser(user);
-        return user;
+      await authService.updateUser(user);
+      return user;
     });
+
 export const registerThunk = createAsyncThunk(
-    "user/register", async (credentials) => {
-        const user = await authService.register(credentials);
-        return user;
-    });
+    "user/register", async (user) => {
+      const registeredUser = await authService.register(user);
+      return registeredUser;
+    }
+);
 
 export const updateUserByIdThunk = createAsyncThunk(
     "user/updateUserById", async ({user, uid}) => {
@@ -36,7 +49,9 @@ export const updateUserByIdThunk = createAsyncThunk(
 );
 
 export const deleteUserThunk = createAsyncThunk(
-    "user/deleteUser", async (user) => {
-      await authService.deleteUser(user);
-      return user;
-    });
+    "user/deleteUser",
+    async (userId) => {
+      await authService.deleteUser(userId);
+      return userId;
+    }
+);

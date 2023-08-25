@@ -9,7 +9,6 @@ const WhoToFollowList = () => {
   useEffect(() => {
     dispatch(findWhoToFollowListThunk())
   }, [dispatch])
-  console.log(whoToFollowList)
   return (
       <ul className="list-group">
         <li className="list-group-item">
@@ -20,13 +19,13 @@ const WhoToFollowList = () => {
               Loading...
             </li>
         }
-        {
-          whoToFollowList.map(whoToFollow =>
-              <WhoToFollowListItem
-                  key={whoToFollow._id}
-                  whoToFollow={whoToFollow} />
-          )
-        }
+{
+  Array.isArray(whoToFollowList) && whoToFollowList.map(whoToFollow =>
+    <WhoToFollowListItem
+        key={whoToFollow._id}
+        whoToFollow={whoToFollow} />
+  )
+}
       </ul>
   );
 };
