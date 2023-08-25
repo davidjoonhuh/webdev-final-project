@@ -17,6 +17,7 @@ import whoReducer from "./reducers/who-reducer";
 import UserProfileScreen from "./profile-screen/user-profile-screen";
 import PublicProfileScreen from "./profile-screen/public-profile-screen";
 import store from "./store"
+import AdminScreen from "./profile-screen/admin-profile-screen";
 
 function Youboxd() {
     return (
