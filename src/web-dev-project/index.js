@@ -1,25 +1,30 @@
 import React, { useReducer } from "react";
 import { Routes, Route } from "react-router";
 import NavigationSidebar from "./navigation-sidebar";
+import { configureStore } from '@reduxjs/toolkit';
 import { Provider } from "react-redux";
-import { useSelector } from 'react-redux';
+import youtubeReducer from "./reducers/youtube-reducer";
 import SearchPage from "./search";
 import DetailsPage from "./details";
 import HomeScreen from "./home-screen";
 import ProfileScreen from "./user/profile-screen";
 import LoginScreen from "./user/login-screen";
 import RegisterScreen from "./user/register-screen";
+import authReducer from "./reducers/auth-reducer";
+import commentsReducer from "./reducers/comments-reducer";
+import usersReducer from "./reducers/users-reducer";
 import WhoToFollowList from "./who-to-follow-list";
+import whoReducer from "./reducers/who-reducer";
 import UserProfileScreen from "./profile-screen/user-profile-screen";
 import PublicProfileScreen from "./profile-screen/public-profile-screen";
-import AdminProfileScreen from './profile-screen/admin-profile-screen';
+import AdminScreen from "./profile-screen/admin-profile-screen";
 import store from "./store"
 
 function Youboxd() {
-
-    const isAdmin = useSelector(state => state.users.user?.isAdmin || false);
-
     return (
+        <Provider store={store}>
+
+            <div>
                 <div className="row">
                     <div className="col-2">
                         <NavigationSidebar />
@@ -32,15 +37,16 @@ function Youboxd() {
                             <Route path="/login" element={<LoginScreen />} />
                             <Route path="/register" element={<RegisterScreen />} />
                             <Route path="/profile" element={<UserProfileScreen/>}/>
-                            <Route path="/profile" element={isAdmin ? <AdminProfileScreen /> : <UserProfileScreen />} />
                             <Route path="/profile/:profileId" element={<PublicProfileScreen/>} />
+                            <Route path="/admin" element={<AdminScreen/>}/>
                         </Routes>
                     </div>
                    <div
                     className="d-none d-lg-block col-lg-4 col-xl-3">
                     <WhoToFollowList /></ div>
                 </div>
-    )
+            </div>
+        </Provider>
+    );
 }
-
 export default Youboxd;
