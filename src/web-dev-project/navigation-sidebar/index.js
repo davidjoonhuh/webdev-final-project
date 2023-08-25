@@ -56,7 +56,7 @@ const NavigationSidebar = () => {
         </Link>
       }
 
-      {currentUser && currentUser.role !== "Administrator" &&
+      {currentUser &&
         <Link to={"/youboxd/profile"} className={`list-group-item ${active === "profile" ? "active" : ""}`}>
           <div className="d-flex align-items-center">
             <ImProfile /> <label className="d-none d-xl-flex wd-fill-width wd-padding-left-side">Profile</label>

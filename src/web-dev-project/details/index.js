@@ -28,7 +28,7 @@ function DetailsPage() {
         var date = new Date(0);
         date.setSeconds(totalseconds); // specify value for SECONDS here
         var timeString = date.toISOString().substring(11, 19);
-        return(timeString)
+        return (timeString)
 
         // var sec_num = parseInt(totalseconds, 10); // don't forget the second param
         // var h = Math.floor(sec_num / 3600);
@@ -61,6 +61,14 @@ function DetailsPage() {
         };
         fetchData();
     }, []);
+
+    function getEmbeddedVideo() {
+        return(
+            "https://www.youtube.com/embed/" + videoId
+        )
+    }
+
+
     return (
         <>
             <h2>Video Details</h2>
@@ -69,7 +77,8 @@ function DetailsPage() {
                     <div>
                         <div className="row">
                             <div className="col-auto">
-                                <img className='ui image rounded' src={videoData.snippet.thumbnails.high.url} />
+                                <iframe className="ui image-rounded"width="560" height="315" src={getEmbeddedVideo()} frameborder="0" allowfullscreen></iframe>
+
                             </div>
                             <div className="col">
                                 <div className='row wd-font-bold'>
@@ -128,7 +137,7 @@ function DetailsPage() {
                         </div>
                         <div className="row">
                             <h4>Comments</h4>
-                            <CommentsList vId={videoId}/>
+                            <CommentsList vId={videoId} />
                         </div>
                     </div>
                 )}
