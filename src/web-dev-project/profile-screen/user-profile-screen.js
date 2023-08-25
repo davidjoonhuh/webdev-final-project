@@ -141,21 +141,8 @@ function UserProfileScreen() {
       <h1>❤User Profile Page❤️</h1>
       {profile && (
         <div>
-          <div style={{ border: "1px solid black", padding: "10px" }}>
-            {myFollowers.length >= 5 ? (
-              <span style={{ color: "blue" }}>
-                {" "}
-                This is YounXD's Verified User☑️☑️☑️
-              </span>
-            ) : (
-              <span style={{ color: "red" }}>
-                {" "}
-                This is a normal User!🚩🚩🚩
-              </span>
-            )}
-          </div>
           <div>
-            <label style={{ color: profile.color ?? "black" }}>
+            <label>
               🌸Username🌸
             </label>
             <input
@@ -170,29 +157,6 @@ function UserProfileScreen() {
                 setProfile(newProfile);
               }}
             />
-          </div>
-
-          <div>
-            {shouldShowColorSelection && (
-              <div>
-                <label>
-                  🏷️🏷️🏷️Choose Your Username's Color(Only for Verified User!)：
-                </label>
-                <select
-                  value={selectedColor}
-                  onChange={(event) => setSelectedColor(event.target.value)}
-                >
-                  {colorChoices.map((choice) => (
-                    <option key={choice.color} value={choice.color}>
-                      {choice.name}
-                    </option>
-                  ))}
-                </select>
-                <button onClick={handleUpdate} className="btn btn-primary mt-2">
-                  Update Color
-                </button>
-              </div>
-            )}
           </div>
           <br />
           <div>

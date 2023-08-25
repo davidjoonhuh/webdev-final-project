@@ -1,10 +1,6 @@
 import { Link, useLocation } from "react-router-dom";
-import { AiOutlineHome } from "react-icons/ai";
+import { AiOutlineHome, AiOutlineSearch } from "react-icons/ai";
 import { useSelector } from "react-redux";
-import { HiOutlineHashtag } from "react-icons/hi"
-import { IoIosNotificationsOutline } from "react-icons/io";
-import { BsEnvelope, BsBookmark, BsCardList } from "react-icons/bs"
-import { CiCircleMore } from "react-icons/ci";
 import { BiLogIn, BiSolidRegistered } from "react-icons/bi";
 import { ImProfile } from "react-icons/im";
 import "./index.css"
@@ -29,7 +25,7 @@ const NavigationSidebar = () => {
         className={`list-group-item w ${active === "explore" ? "active"
           : ""}`}>
         <div className="d-flex align-items-center">
-          <HiOutlineHashtag /> <label
+          <AiOutlineSearch /> <label
             className="d-none d-xl-flex wd-fill-width wd-padding-left-side">Search</label>
         </div>
       </Link>

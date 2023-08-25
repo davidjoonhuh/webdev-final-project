@@ -63,8 +63,8 @@ const UserHomeScreen = () => {
     }
 
     console.log(filteredComments)
-
-    return (
+    if (filteredComments.length > 0) {
+          return (
       <div>
         <h3>Comments by Following:</h3>
         <ul className="list-group">
@@ -90,6 +90,14 @@ const UserHomeScreen = () => {
         </ul>
       </div>
     );
+    } else {
+      return (
+        <>
+          <h3>Uh oh! Follow other users to populate your feed.</h3>
+        </>
+      )
+    }
+
   }
 
   return (
