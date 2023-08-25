@@ -10,11 +10,10 @@ const WhoToFollowList = () => {
     dispatch(findWhoToFollowListThunk())
   }, [dispatch])
   return (
+    <>
+    <h3>User Directory</h3>
     <div style={{ maxHeight: '800px', overflowY: 'auto' }}>
       <ul className="list-group">
-        <li className="list-group-item">
-          <h3>User Directory</h3>
-        </li>
         {loading &&
           <li className="list-group-item">
             Loading...
@@ -29,6 +28,7 @@ const WhoToFollowList = () => {
         }
       </ul>
     </div>
+    </>
   );
 };
 export default WhoToFollowList;
