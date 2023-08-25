@@ -18,7 +18,7 @@ import UserProfileScreen from "./profile-screen/user-profile-screen";
 import PublicProfileScreen from "./profile-screen/public-profile-screen";
 
 const store = configureStore({
-    reducer: { 
+    reducer: {
         whoToFollowList: whoReducer,
         vids: youtubeReducer,
         user: authReducer,
@@ -30,25 +30,110 @@ function Youboxd() {
     return (
         <Provider store={store}>
 
-            <div>
+            <div className="d-none d-xxl-block">
                 <div className="row">
                     <div className="col-2">
                         <NavigationSidebar />
                     </div>
                     <div className="col-7">
                         <Routes>
-                            <Route path="/home" element={<HomeScreen/>}/>
-                            <Route path="/search" element={<SearchPage/>} />
-                            <Route path="/details" element={<DetailsPage/>} />
+                            <Route path="/home" element={<HomeScreen />} />
+                            <Route path="/search" element={<SearchPage />} />
+                            <Route path="/details" element={<DetailsPage />} />
                             <Route path="/login" element={<LoginScreen />} />
                             <Route path="/register" element={<RegisterScreen />} />
-                            <Route path="/profile" element={<UserProfileScreen/>}/>
-                            <Route path="/profile/:profileId" element={<PublicProfileScreen/>} />
+                            <Route path="/profile" element={<UserProfileScreen />} />
+                            <Route path="/profile/:profileId" element={<PublicProfileScreen />} />
                         </Routes>
                     </div>
-                   <div
-                    className="d-none d-lg-block col-lg-4 col-xl-3">
-                    <WhoToFollowList /></ div>
+                    <div
+                        className="col-3">
+                        <WhoToFollowList />
+                    </div>
+                </div>
+            </div>
+
+            <div className="d-none d-xl-block d-xxl-none">
+                <div className="row">
+                    <div className="col-2">
+                        <NavigationSidebar />
+                    </div>
+                    <div className="col-6">
+                        <Routes>
+                            <Route path="/home" element={<HomeScreen />} />
+                            <Route path="/search" element={<SearchPage />} />
+                            <Route path="/details" element={<DetailsPage />} />
+                            <Route path="/login" element={<LoginScreen />} />
+                            <Route path="/register" element={<RegisterScreen />} />
+                            <Route path="/profile" element={<UserProfileScreen />} />
+                            <Route path="/profile/:profileId" element={<PublicProfileScreen />} />
+                        </Routes>
+                    </div>
+                    <div
+                        className="col-4">
+                        <WhoToFollowList />
+                    </div>
+                </div>
+            </div>
+
+            <div className="d-none d-lg-block d-xl-none">
+                <div className="row">
+                    <div className="col-1">
+                        <NavigationSidebar />
+                    </div>
+                    <div className="col-7">
+                        <Routes>
+                            <Route path="/home" element={<HomeScreen />} />
+                            <Route path="/search" element={<SearchPage />} />
+                            <Route path="/details" element={<DetailsPage />} />
+                            <Route path="/login" element={<LoginScreen />} />
+                            <Route path="/register" element={<RegisterScreen />} />
+                            <Route path="/profile" element={<UserProfileScreen />} />
+                            <Route path="/profile/:profileId" element={<PublicProfileScreen />} />
+                        </Routes>
+                    </div>
+                    <div
+                        className="col-4">
+                        <WhoToFollowList />
+                    </div>
+                </div>
+            </div>
+
+            <div className="d-none d-md-block d-lg-none">
+            <div className="row">
+                    <div className="col-2">
+                        <NavigationSidebar />
+                    </div>
+                    <div className="col-8">
+                        <Routes>
+                            <Route path="/home" element={<HomeScreen />} />
+                            <Route path="/search" element={<SearchPage />} />
+                            <Route path="/details" element={<DetailsPage />} />
+                            <Route path="/login" element={<LoginScreen />} />
+                            <Route path="/register" element={<RegisterScreen />} />
+                            <Route path="/profile" element={<UserProfileScreen />} />
+                            <Route path="/profile/:profileId" element={<PublicProfileScreen />} />
+                        </Routes>
+                    </div>
+                </div>
+            </div>
+
+            <div className="d-none d-sm-block d-md-none">
+            <div className="row">
+                    <div className="col-2">
+                        <NavigationSidebar />
+                    </div>
+                    <div className="col-8">
+                        <Routes>
+                            <Route path="/home" element={<HomeScreen />} />
+                            <Route path="/search" element={<SearchPage />} />
+                            <Route path="/details" element={<DetailsPage />} />
+                            <Route path="/login" element={<LoginScreen />} />
+                            <Route path="/register" element={<RegisterScreen />} />
+                            <Route path="/profile" element={<UserProfileScreen />} />
+                            <Route path="/profile/:profileId" element={<PublicProfileScreen />} />
+                        </Routes>
+                    </div>
                 </div>
             </div>
         </Provider>
