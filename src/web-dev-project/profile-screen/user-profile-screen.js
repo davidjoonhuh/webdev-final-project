@@ -32,7 +32,7 @@ function UserProfileScreen() {
     if (currentUser) {
       loadProfile();
     }
-  }, [currentUser]);
+  }, []);
 
   useEffect(() => {
     let followingIds = profile?.following ?? [];
