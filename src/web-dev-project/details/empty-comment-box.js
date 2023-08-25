@@ -8,7 +8,7 @@ const EmptyCommentBox = () => {
             className="form-control border-0">
         </textarea>
         <div>
-            <button className="rounded-pill btn btn-primary float-end mt-2 ps-3 pe-3 fw-bold">
+            <button className="rounded-pill btn btn-primary float-end mt-2 ps-3 pe-3 fw-bold" >
                 Comment
             </button>
         </div>

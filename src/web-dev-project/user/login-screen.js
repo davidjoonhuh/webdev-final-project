@@ -7,10 +7,16 @@ function LoginScreen() {
     const [password, setPassword] = useState("");
     const navigate = useNavigate();
     const dispatch = useDispatch();
+
     const handleLogin = async () => {
         try {
-            await dispatch(loginThunk({ username, password }));
-            navigate("/youboxd/profile");
+            const response = await dispatch(loginThunk({ username, password }));
+            console.log(response.meta.requestStatus)
+            if (response.meta.requestStatus !== "rejected") {
+                navigate("/youboxd/profile");
+            } else {
+                alert("Please try again!")
+            }
         } catch (e) {
             alert(e);
         }

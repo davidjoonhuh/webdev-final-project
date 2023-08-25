@@ -4,6 +4,8 @@ import { findVideoCommentsThunk } from "../services/comments-thunks";
 import CommentsListItem from "./comments-list-item";
 import CommentBox from "./comment-box";
 import EmptyCommentBox from "./empty-comment-box";
+import ViewerCommentBox from "./viewer-comment-box";
+
 
 const CommentsList = (vId = "-1") => {
     // some sort of currentUser retrieval
@@ -16,14 +18,21 @@ const CommentsList = (vId = "-1") => {
     }, [])
 
 
-    if (comments.length === 0 && currentUser) {
+    if (comments.length === 0 && currentUser && currentUser.role !== "Viewer") {
         return (<>
             No comments yet
 
             <CommentBox vId={videoId}/>
         </>
         )
-    } else if (comments.length > 0 && currentUser){
+    } else if (comments.length === 0 && currentUser && currentUser.role === "Viewer") {
+        return (<>
+            No comments yet
+
+            <ViewerCommentBox/>
+        </>
+        )
+    } else if (comments.length > 0 && currentUser  && currentUser.role !== "Viewer"){
         return (
             <>
                 <ul className="list-group">
@@ -35,6 +44,20 @@ const CommentsList = (vId = "-1") => {
                 </ul>
 
                 <CommentBox vId={videoId}/>
+
+            </>);
+    } else if (comments.length > 0 && currentUser  && currentUser.role === "Viewer"){
+        return (
+            <>
+                <ul className="list-group">
+                    {
+                        comments.map(comment =>
+                            <CommentsListItem
+                                comment={comment}/>)
+                    }
+                </ul>
+
+                <ViewerCommentBox/>
 
             </>);
     } else if (comments.length > 0 && !currentUser){

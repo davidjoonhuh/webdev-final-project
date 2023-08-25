@@ -9,6 +9,7 @@ import {
 import * as whoService from "../services/who-service";
 import { Link } from "react-router-dom";
 import { findUserByIdThunk } from "../services/users-thunks";
+import { findUserCommentsThunk } from "../services/comments-thunks";
 
 function UserProfileScreen() {
   const { currentUser } = useSelector((state) => state.user);
@@ -20,6 +21,8 @@ function UserProfileScreen() {
   const [loading, setLoading] = useState(true);
   const dispatch = useDispatch();
   const navigate = useNavigate();
+
+  const { comments } = useSelector((state) => state.comments)
 
   const loadProfile = async () => {
     setLoading(true);
@@ -71,11 +74,13 @@ function UserProfileScreen() {
         console.error(error);
       }
     };
-
     fetchMyFollowing();
     fetchMyFollowers();
   }, [profile]); // profile added to dependency array
 
+  useEffect(() => {
+    dispatch(findUserCommentsThunk(currentUser._id))
+  }, []);
   const handleLogout = async () => {
     await dispatch(logoutThunk());
     navigate("../login");
@@ -117,27 +122,27 @@ function UserProfileScreen() {
     { name: "Blue", color: "blue" },
   ];
 
-  console.log(profile);
+  const handleVideoSelect = async (id) => {
+    navigate("/youboxd/details?identifier=" + id);
+  }
+
+  function YouTubeThumbnail({ videoId }) {
+    const thumbnailUrl = `https://img.youtube.com/vi/${videoId}/default.jpg`;
+
+    return (
+      <div>
+        <img width={200} height={150} src={thumbnailUrl} alt={`Thumbnail for video ${videoId}`} />
+      </div>
+    );
+  }
+
   return (
     <div>
       <h1>❤User Profile Page❤️</h1>
       {profile && (
         <div>
-          <div style={{ border: "1px solid black", padding: "10px" }}>
-            {myFollowers.length >= 5 ? (
-              <span style={{ color: "blue" }}>
-                {" "}
-                This is YounXD's Verified User☑️☑️☑️
-              </span>
-            ) : (
-              <span style={{ color: "red" }}>
-                {" "}
-                This is a normal User!🚩🚩🚩
-              </span>
-            )}
-          </div>
           <div>
-            <label style={{ color: profile.color ?? "black" }}>
+            <label>
               🌸Username🌸
             </label>
             <input
@@ -152,29 +157,6 @@ function UserProfileScreen() {
                 setProfile(newProfile);
               }}
             />
-          </div>
-
-          <div>
-            {shouldShowColorSelection && (
-              <div>
-                <label>
-                  🏷️🏷️🏷️Choose Your Username's Color(Only for Verified User!)：
-                </label>
-                <select
-                  value={selectedColor}
-                  onChange={(event) => setSelectedColor(event.target.value)}
-                >
-                  {colorChoices.map((choice) => (
-                    <option key={choice.color} value={choice.color}>
-                      {choice.name}
-                    </option>
-                  ))}
-                </select>
-                <button onClick={handleUpdate} className="btn btn-primary mt-2">
-                  Update Color
-                </button>
-              </div>
-            )}
           </div>
           <br />
           <div>
@@ -340,56 +322,29 @@ function UserProfileScreen() {
         </div>
       </div>
       <br></br>
-      {/*       <ul className="list-group mt-2">
-          <li className="list-group-item">
-            <div>
-              <i className="fa-brands fa-square-twitter"></i>
-              <span className="fw-bolder"> My Comments: </span>
-            </div>
-          </li>
-          {comments.map((comment) => (
-              <li className="list-group-item">
-                <div className="row">
-                  <div className="col-10">
-                    <i className="bi bi-x-lg float-end btn btn-danger rounded-pill float-end mt-2 ps-2 pe-2 fw-bold"
-                       onClick={() => deleteTuitHandler(comment._id)}>Delete</i>
-                    <div><span className="fw-bolder">{comment.username}</span> <i
-                        className="fas fa-check-circle wd-blue"></i> @{comment.username}
-                    </div>
-                    <div>{comments.text}</div>
-                  </div>
-                </div>
-              </li>
-          ))}
-        </ul>*/}
       <ul className="list-group mt-2">
         <li className="list-group-item">
           <div>
-            <i className="fa-solid fa-heart"></i>
-            <span className="fw-bolder"> 💕 My Likes: </span>
-          </div>
-          <div>
-            <iframe
-              width="560"
-              height="315"
-              src="https://www.youtube.com/embed/oTwkYW0EGbc?si=5OFFbTXS4KgTuiWo"
-              title="YouTube video player"
-              frameBorder="0"
-              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-              allowFullScreen
-            ></iframe>
-            <iframe
-              width="560"
-              height="315"
-              src="https://www.youtube.com/embed/rWB_thEvs20?si=z69Aijy2Qw_YBYrZ"
-              title="YouTube video player"
-              frameBorder="0"
-              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-              allowFullScreen
-            ></iframe>
+            <i className="fa-brands fa-square-twitter"></i>
+            <span className="fw-bolder"> My Comments: </span>
           </div>
         </li>
+        {comments.map((comment) => (
+          <li className="list-group-item">
+
+            <div className="row">
+              <div className="col-auto">
+                <button onClick={() => handleVideoSelect(comment.videoId)}> <YouTubeThumbnail videoId={comment.videoId} /> </button>
+              </div>
+              <div className="col-auto">
+                 {comment.text}
+              </div>
+
+            </div>
+          </li>
+        ))}
       </ul>
+
     </div>
   );
 }

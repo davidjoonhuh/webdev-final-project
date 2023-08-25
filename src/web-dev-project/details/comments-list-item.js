@@ -12,7 +12,9 @@ const CommentsListItem = ({ comment }) => {
     useEffect(() => {
         async function fetchUserId() {
             const { payload } = await dispatch(findUserByIdThunk(comment.authorId))
-            setCommentUsername(payload.username)
+            if (payload !== null) {
+                setCommentUsername(payload.username)
+            }
         }
         fetchUserId()
     }, [])

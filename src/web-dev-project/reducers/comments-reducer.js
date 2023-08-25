@@ -46,6 +46,11 @@ const commentsSlice = createSlice({
             (state, action) => {
                 state.loading = false;
                 state.comments = action.error;
+            },
+        [findUserCommentsThunk.fulfilled]:
+            (state, {payload}) => {
+                state.loading = false;
+                state.comments = payload; 
             }
     }
 })
